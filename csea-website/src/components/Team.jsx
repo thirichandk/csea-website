@@ -1,8 +1,10 @@
 import React from 'react';
 import './Team.css';
 
-// Auto-import any images placed in src/assets/office-bearers
-const images = import.meta.glob('../assets/office-bearers/*.{jpg,jpeg,png,svg}', { eager: true, import: 'default' });
+// Auto-import images from both assets root and office-bearers folder
+const imagesA = import.meta.glob('../assets/office-bearers/*.{jpg,jpeg,png,svg}', { eager: true, import: 'default' });
+const imagesB = import.meta.glob('../assets/*.{jpg,jpeg,png,svg}', { eager: true, import: 'default' });
+const images = { ...imagesA, ...imagesB };
 
 function findImage(hint) {
   if (!hint) return null;
@@ -19,10 +21,24 @@ function findImage(hint) {
 }
 
 const teamMembers = [
-  { name: 'Prashandh Raju', year: '[Academic Year]', imgKey: 'prashandh' },
-  { name: 'Kavinbharathi', year: '[Academic Year]', imgKey: 'kavin' },
-  { name: 'Neeraj', year: '[Academic Year]', imgKey: 'neeraj' }
+  {
+    name: 'Mr. M. R. Prasanndh Raaju',
+    role: 'M. S in Data Science and Machine Learning, University of Oldenbourg, Germany',
+    imgKey: 'prashandh'
+  },
+  {
+    name: 'Mr. A. Kavinbharathi',
+    role: 'Business Analyst, Verteil Technologies, Kochin',
+    imgKey: 'kavinbharathi'
+  },
+  {
+    name: 'Mr. Neeraja',
+    role: 'BA Role, Solartis',
+    imgKey: 'neeraj'
+  }
 ];
+
+const assignedImages = teamMembers.map((member) => findImage(member.imgKey));
 
 const Team = () => {
   return (
@@ -40,19 +56,16 @@ const Team = () => {
               className={`team-card glass reveal delay-${(index + 1) * 200}`}
             >
               <div className="team-image-skeleton">
-                {(() => {
-                  const src = findImage(member.imgKey);
-                  return src ? (
-                    <img src={src} alt={member.name} className="team-photo" />
-                  ) : (
-                    <div className="skeleton-shimmer"></div>
-                  );
-                })()}
+                {assignedImages[index] ? (
+                  <img src={assignedImages[index]} alt={member.name} className="team-photo" />
+                ) : (
+                  <div className="skeleton-shimmer"></div>
+                )}
               </div>
               <div className="team-info">
                 <h3 className="team-name">{member.name}</h3>
                 <div className="team-divider"></div>
-                <p className="team-year">{member.year}</p>
+                <p className="team-year">{member.role || member.year}</p>
               </div>
             </div>
           ))}

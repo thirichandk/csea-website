@@ -20,7 +20,7 @@ export default function OfficeBearers() {
         <div className="section-badge">OFFICE BEARERS</div>
         <h2 className="office-title">CSEA Office Bearers</h2>
         <p className="office-description">
-          A modern layout for the full CSEA leadership roster with responsive cards, glassmorphism styling, and clean section flow.
+          "Leadership is not about being in charge. It is about taking care of those in your charge." — Simon Sinek
         </p>
       </div>
 

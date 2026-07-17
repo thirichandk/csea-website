@@ -17,7 +17,7 @@ import Executive8Img from '../assets/office-bearers/Haresh.V.jpg';
 import Executive9Img from '../assets/office-bearers/MARTIN ROGER J.png';
 import Executive10Img from '../assets/office-bearers/RAJAMITHRA GP.jpg';
 import Executive11Img from '../assets/office-bearers/Sivadharshan S.jpeg';
-import Executive12Img from '../assets/office-bearers/shaswanth.jpg';
+import Executive12Img from '../assets/office-bearers/rithin.png';
 import Executive13Img from '../assets/office-bearers/YOGASRI P 25CSR358.jpg';
 import Newsletter1Img from '../assets/office-bearers/Kavishree C.jpg';
 import Newsletter2Img from '../assets/office-bearers/DHARSHINI  N 24CSR061.JPG';
