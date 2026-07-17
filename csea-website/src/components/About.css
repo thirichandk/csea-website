@@ -1,0 +1,142 @@
+.about {
+  background-color: var(--surface-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.about-left {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.collage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.collage-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.collage-img-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 65%;
+  z-index: 2;
+}
+
+.collage-img-2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 55%;
+  z-index: 3;
+}
+
+.collage-img-3 {
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  width: 45%;
+  height: 45%;
+  z-index: 1;
+  opacity: 0.5;
+  filter: blur(2px);
+}
+
+/* Simple CSS parallax simulation on hover since native scroll parallax requires JS */
+.parallax {
+  transition: transform 0.8s ease-out;
+}
+
+.parallax-reverse {
+  transition: transform 0.8s ease-out;
+}
+
+.about-left:hover .parallax {
+  transform: translateY(-15px) scale(1.02);
+}
+
+.about-left:hover .parallax-reverse {
+  transform: translateY(15px) scale(1.02);
+}
+
+.about-title {
+  margin-bottom: 1.5rem;
+}
+
+.title-accent {
+  width: 60px;
+  height: 4px;
+  background-color: var(--text-primary);
+  border-radius: var(--radius-full);
+  margin-bottom: 2.5rem;
+}
+
+.about-text {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 4rem;
+  line-height: 1.6;
+}
+
+.trust-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.metric-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.05em;
+}
+
+.metric-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .about-left {
+    height: 400px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .trust-metrics {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

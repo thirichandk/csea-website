@@ -1,0 +1,175 @@
+.bento-section {
+  background-color: var(--surface-hover);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  gap: 1.5rem;
+}
+
+.bento-card {
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Advanced hover border reveal */
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: var(--radius-lg);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent-color), #ec4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient(180deg, var(--surface-color) 0%, var(--surface-hover) 100%);
+}
+
+.bento-hero {
+  grid-column: span 4;
+  background: var(--surface-color);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 3rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Elegant light theme background animation */
+.bento-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.03) 0%, transparent 40%);
+  z-index: -1;
+  animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.bento-hero:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.bento-title {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  margin-bottom: 2.5rem;
+  color: var(--text-tertiary);
+  font-weight: 700;
+}
+
+.vision-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.15;
+  font-weight: 500;
+  max-width: 950px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Base Cards span 1 column */
+.bento-card:not(.bento-hero) {
+  grid-column: span 1;
+}
+
+/* Wide card spans 2 columns */
+.bento-wide {
+  grid-column: span 2 !important;
+}
+
+.bento-icon {
+  font-size: 2.5rem;
+  margin-bottom: auto; /* Pushes the title/desc to the bottom */
+  padding-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--surface-hover), var(--surface-color));
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-normal);
+}
+
+.bento-card:hover .bento-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.5), 0 10px 20px rgba(0,102,204,0.15);
+  border-color: rgba(0,102,204,0.3);
+}
+
+.bento-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.bento-card-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-hero {
+    grid-column: span 2;
+  }
+  .bento-card:not(.bento-hero) {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-hero, .bento-card:not(.bento-hero), .bento-wide {
+    grid-column: span 1 !important;
+  }
+}

@@ -1,0 +1,224 @@
+.sdg-activities-page {
+  padding: 4rem 0 2rem;
+}
+
+.sdg-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(59, 130, 246, 0.05));
+  border: 1px solid rgba(59, 130, 246, 0.14);
+  border-radius: 2rem;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
+  margin-bottom: 3rem;
+}
+
+.sdg-hero-copy {
+  max-width: 900px;
+  text-align: center;
+}
+
+.sdg-hero-copy .section-badge-blue {
+  display: inline-flex;
+  padding: 0.65rem 1rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.sdg-hero-copy h1 {
+  font-size: clamp(2.5rem, 3.5vw, 4rem);
+  margin-bottom: 1rem;
+  color: #103a8b;
+}
+
+.sdg-hero-copy p {
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.sdg-content {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.sdg-card {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(59, 130, 246, 0.16);
+  border-radius: 28px;
+  box-shadow: 0 24px 50px rgba(59, 130, 246, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.sdg-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 70px rgba(59, 130, 246, 0.16);
+}
+
+.sdg-card-image-wrapper {
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.sdg-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 320px;
+  transition: transform 0.5s ease;
+}
+
+.sdg-card:hover .sdg-card-image {
+  transform: scale(1.05);
+}
+
+.sdg-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sdg-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sdg-card-meta span {
+  font-size: 0.95rem;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.sdg-badges {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.sdg-badge {
+  display: inline-flex;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #0f3d91;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.sdg-card-content h2 {
+  font-size: 2rem;
+  color: #0f2d6d;
+  margin-bottom: 0.35rem;
+}
+
+.sdg-card-content h3 {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.sdg-card-content p {
+  color: #475569;
+  line-height: 1.85;
+}
+
+.sdg-gallery {
+  padding: 1px 0 0;
+}
+
+.gallery-header {
+  margin-bottom: 1.5rem;
+}
+
+.gallery-header h2 {
+  font-size: clamp(2rem, 2.5vw, 2.75rem);
+  color: #103a8b;
+  margin-bottom: 0.75rem;
+}
+
+.gallery-header p {
+  color: #6b7280;
+  line-height: 1.8;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-card {
+  padding: 1.75rem;
+  border-radius: 24px;
+  border: 1px solid rgba(59, 130, 246, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 40px rgba(59, 130, 246, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 45px rgba(59, 130, 246, 0.12);
+}
+
+.gallery-card-tag {
+  display: inline-flex;
+  padding: 0.5rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #164ea7;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.gallery-card p {
+  color: #4b5563;
+  line-height: 1.85;
+}
+
+@media (max-width: 1024px) {
+  .sdg-card {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .sdg-activities-page {
+    padding: 2rem 0 1.5rem;
+  }
+
+  .sdg-hero {
+    padding: 2rem 1.25rem;
+  }
+
+  .sdg-card {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .sdg-card-image {
+    min-height: 260px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
