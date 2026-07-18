@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
-import { Mail, MapPin, Globe, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -26,15 +26,11 @@ export default function Footer() {
             </li>
             <li>
               <Phone size={18} className="contact-icon" />
-              <span>+91 4294 226555</span>
+              <span>+91 4294 226560</span>
             </li>
             <li>
               <Mail size={18} className="contact-icon" />
               <span>csea@kongu.edu</span>
-            </li>
-            <li>
-              <Globe size={18} className="contact-icon" />
-              <a href="https://kongu.ac.in" target="_blank" rel="noreferrer">www.kongu.ac.in</a>
             </li>
           </ul>
         </div>

@@ -1,9 +1,12 @@
 import React from 'react';
 import './VisionMission.css';
+import PodcastSection from './PodcastSection';
 
 const VisionMission = () => {
   return (
-    <section className="section bento-section" id="vision">
+    <>
+      <PodcastSection />
+      <section className="section bento-section" id="vision">
       <div className="container">
         
         <div className="bento-grid">
@@ -11,7 +14,7 @@ const VisionMission = () => {
           <div className="bento-card bento-hero reveal">
             <h2 className="bento-title">Our Vision</h2>
             <blockquote className="vision-quote">
-              "To cultivate a vibrant community of innovative thinkers, responsible professionals, and future technology leaders."
+              “To cultivate a vibrant community of innovative thinkers, responsible professionals, and future technology leaders”
             </blockquote>
           </div>
 
@@ -49,6 +52,7 @@ const VisionMission = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

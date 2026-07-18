@@ -49,6 +49,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToAboutCSEA = () => {
+    setView('about');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigateToOfficeBearers = () => {
     setView('office');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -72,6 +77,7 @@ export default function App() {
         view={view}
         setView={setView}
         onNavigate={handleNavigateToDiscover}
+        onNavigateAboutCSEA={handleNavigateToAboutCSEA}
         onNavigateOffice={handleNavigateToOfficeBearers}
         onNavigateYearPlan={handleNavigateToYearPlan}
         onNavigateSDG={handleNavigateToSDGActivities}
@@ -88,6 +94,26 @@ export default function App() {
             <Marquee />
             <Team />
           </main>
+        )}
+
+        {view === 'about' && (
+          <section className="office-bearers-section">
+            <div className="container">
+              <div className="back-nav-wrapper">
+                <button className="btn-back-home" onClick={() => { setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                  <ArrowLeft size={16} />
+                  <span>Back to Home</span>
+                </button>
+              </div>
+              <div className="office-header">
+                <div className="section-badge">ABOUT CSEA</div>
+                <h2 className="office-title">About CSEA</h2>
+                <p className="office-description" style={{ textAlign: 'left', maxWidth: '900px' }}>
+                  The Computer Science and Engineering Association (CSEA) is a vibrant student-driven body that forms the backbone of academic, technical, and cultural activities in the CSE department. It serves as a dynamic forum where students come together to explore, learn, and innovate beyond the classroom. By organizing guest lectures, technical talks, workshops, hackathons, symposium, and cultural events, CSEA provides ample opportunities to sharpen technical knowledge, foster leadership, and nurture creativity. Acting as a bridge between industry, and students, the association keeps members connected with emerging technologies while encouraging collaboration, problem-solving, and holistic growth. With its diverse initiatives, CSEA not only cultivates professional excellence but also builds a strong sense of community, preparing students to meet industry expectations and contribute meaningfully to society.
+                </p>
+              </div>
+            </div>
+          </section>
         )}
 
         {view === 'office' && (

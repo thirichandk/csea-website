@@ -331,14 +331,15 @@ a {
 .navbar-logo img,
 .csea-logo-image {
   display: block;
-  max-height: 80px;
+  max-height: 112px;
   width: auto;
+  background: transparent;
 }
 
 @media (max-width: 900px) {
   .navbar-logo img,
   .csea-logo-image {
-    max-height: 68px;
+    max-height: 88px;
   }
 }
 
@@ -355,6 +356,7 @@ a {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-top: 6px;
 }
 
 /* Navbar links active underline animation */
@@ -655,6 +657,11 @@ a {
 /* Events Section Explorer */
 .events-section-container {
   padding: 130px 0 80px 0;
+  position: relative;
+}
+
+.office-bearers-section {
+  padding-top: 120px;
   position: relative;
 }
 

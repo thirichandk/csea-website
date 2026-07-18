@@ -75,14 +75,33 @@
   max-width: 320px;
 }
 
+.office-bearers-grid.faculty-grid {
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  max-width: 980px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.office-bearers-grid.faculty-grid > * {
+  max-width: 300px;
+}
+
 @media (max-width: 900px) {
   .office-bearers-grid {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+
+  .office-bearers-grid.faculty-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .office-bearers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .office-bearers-grid.faculty-grid {
     grid-template-columns: 1fr;
   }
 }

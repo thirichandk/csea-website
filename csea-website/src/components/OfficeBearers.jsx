@@ -17,8 +17,8 @@ export default function OfficeBearers() {
   return (
     <div className="office-bearers-wrapper">
       <div className="office-header">
-        <div className="section-badge">OFFICE BEARERS</div>
-        <h2 className="office-title">CSEA Office Bearers</h2>
+        <div className="section-badge">OUR TEAM</div>
+        <h2 className="office-title">CSEA Our Team</h2>
         <p className="office-description">
           "Leadership is not about being in charge. It is about taking care of those in your charge." — Simon Sinek
         </p>
@@ -34,7 +34,7 @@ export default function OfficeBearers() {
               <h3 className="office-section-title">{section.title}</h3>
               <div className="section-divider" />
             </div>
-            <div className="office-bearers-grid">
+            <div className={`office-bearers-grid ${sectionKey === 'facultyCoordinators' ? 'faculty-grid' : ''}`}>
               {section.members.map((member) => (
                 <OfficeBearerCard
                   key={member.name}

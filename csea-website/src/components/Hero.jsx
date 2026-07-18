@@ -20,7 +20,7 @@ const Hero = ({ onDiscover }) => {
       <div className="container hero-container">
         <div className="hero-content reveal">
           <div className="hero-badge" style={{ animation: 'float 3s infinite ease-in-out' }}>
-            <span>Welcome to CSEA KEC</span>
+            <span style={{ fontSize: '1.15rem' }}>Welcome to CSEA KEC</span>
           </div>
           
           <h1 className="heading-hero hero-title" style={{ animation: 'fadeInUp 1s ease-out' }}>
@@ -34,7 +34,7 @@ const Hero = ({ onDiscover }) => {
           
           <div className="hero-cta delay-200 reveal">
             <button className="btn-primary" onClick={() => onDiscover('all')} style={{ animation: 'pulseInfinity 3s infinite' }}>
-              <span>Discover Events</span>
+              <span>Explore Events</span>
             </button>
             <a href="#about" className="btn-outlined">
               Learn More

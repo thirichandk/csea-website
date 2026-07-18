@@ -17,7 +17,7 @@ import Executive8Img from '../assets/office-bearers/Haresh.V.jpg';
 import Executive9Img from '../assets/office-bearers/MARTIN ROGER J.png';
 import Executive10Img from '../assets/office-bearers/RAJAMITHRA GP.jpg';
 import Executive11Img from '../assets/office-bearers/Sivadharshan S.jpeg';
-import Executive12Img from '../assets/office-bearers/rithin.png';
+import Executive12Img from '../assets/office-bearers/rihtinika.jpg';
 import Executive13Img from '../assets/office-bearers/YOGASRI P 25CSR358.jpg';
 import Newsletter1Img from '../assets/office-bearers/Kavishree C.jpg';
 import Newsletter2Img from '../assets/office-bearers/DHARSHINI  N 24CSR061.JPG';
@@ -44,11 +44,11 @@ export const officeBearers = {
   facultyCoordinators: {
     title: 'Faculty Coordinators',
     members: [
-      { name: 'Dr. N. Sasipriya', position: 'ASP/CSE', image: SasipriyaImg },
-      { name: 'Ms. C. Roopa', position: 'AP/CSE', image: RoopaImg },
-      { name: 'Ms. S. Ramana', position: 'AP/CSE', image: RamanaImg },
-      { name: 'Mr. K. Sudhakar', position: 'AP/CSE', image: SudhakarImg },
-      { name: 'Mr. R. Ravichandran', position: 'AP/CSE', image: RaviImg }
+      { name: 'Dr. N. Sasipriya', position: 'Associate Professor', image: SasipriyaImg },
+      { name: 'Ms. C. Roopa', position: 'Assistant Professor', image: RoopaImg },
+      { name: 'Ms. S. Ramana', position: 'Assistant Professor', image: RamanaImg },
+      { name: 'Mr. K. Sudhakar', position: 'Assistant Professor', image: SudhakarImg },
+      { name: 'Mr. R. Ravichandran', position: 'Assistant Professor', image: RaviImg }
     ]
   },
   secretary: {
@@ -67,10 +67,10 @@ export const officeBearers = {
   jointSecretary: {
     title: 'Joint Secretary',
     members: [
+      { name: 'SHOBIYA S', position: 'Joint Secretary', image: Treasurer3Img },
       { name: 'AMIRTHAMOZHI V S', position: 'Joint Secretary', image: JointSecretary1Img },
       { name: 'SRI HARINI K', position: 'Joint Secretary', image: JointSecretary2Img },
-      { name: 'VISHAL A C', position: 'Joint Secretary', image: JointSecretary3Img },
-      { name: 'SHOBIYA S', position: 'Joint Secretary', image: Treasurer3Img }
+      { name: 'VISHAL A C', position: 'Joint Secretary', image: JointSecretary3Img }
     ]
   },
   executives: {

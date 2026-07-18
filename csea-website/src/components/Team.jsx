@@ -22,18 +22,21 @@ function findImage(hint) {
 
 const teamMembers = [
   {
-    name: 'Mr. M. R. Prasanndh Raaju',
+    name: 'Mr. M. R. Prasandh Raju',
     role: 'M. S in Data Science and Machine Learning, University of Oldenbourg, Germany',
+    academicYear: '2025-2026',
     imgKey: 'prashandh'
   },
   {
     name: 'Mr. A. Kavinbharathi',
     role: 'Business Analyst, Verteil Technologies, Kochin',
+    academicYear: '2022-2023',
     imgKey: 'kavinbharathi'
   },
   {
-    name: 'Mr. Neeraja',
+    name: 'Mr. Neeraj',
     role: 'BA Role, Solartis',
+    academicYear: '2023-2024',
     imgKey: 'neeraj'
   }
 ];
@@ -66,6 +69,11 @@ const Team = () => {
                 <h3 className="team-name">{member.name}</h3>
                 <div className="team-divider"></div>
                 <p className="team-year">{member.role || member.year}</p>
+                {member.academicYear && (
+                  <p className="team-year" style={{ marginTop: '0.35rem', fontSize: '0.95rem', color: 'var(--text-muted)' }}>
+                    {member.academicYear}
+                  </p>
+                )}
               </div>
             </div>
           ))}

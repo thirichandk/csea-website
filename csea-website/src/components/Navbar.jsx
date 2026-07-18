@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { Menu, X, Home } from 'lucide-react';
 
-export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateOffice, onNavigateYearPlan, onNavigateSDG }) {
+export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateAboutCSEA, onNavigateOffice, onNavigateYearPlan, onNavigateSDG }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,10 +48,17 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
           </button>
 
           <button 
+            className={`nav-link-btn ${view === 'about' ? 'active' : ''}`}
+            onClick={() => { onNavigateAboutCSEA(); setIsOpen(false); }}
+          >
+            <span>About CSEA</span>
+          </button>
+
+          <button 
             className={`nav-link-btn ${view === 'office' ? 'active' : ''}`}
             onClick={() => { onNavigateOffice(); setIsOpen(false); }}
           >
-            <span>Office Bearers</span>
+            <span>Our Team</span>
           </button>
 
           <button
@@ -72,7 +79,7 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
             className={`btn-primary ${view === 'discover' ? 'btn-active' : ''}`}
             onClick={handleDiscoverClick}
           >
-            Discover Events
+            Explore Events
           </button>
         </div>
 
@@ -89,8 +96,12 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
             <Home size={16} />
             <span>Home</span>
           </button>
+          <button className={`mobile-nav-link ${view === 'about' ? 'active' : ''}`} onClick={() => { onNavigateAboutCSEA(); setIsOpen(false); }}>
+            <span>About CSEA</span>
+          </button>
+
           <button className="mobile-nav-link" onClick={() => { onNavigateOffice(); setIsOpen(false); }}>
-            <span>Office Bearers</span>
+            <span>Our Team</span>
           </button>
 
           <button className="mobile-nav-link" onClick={() => { onNavigateYearPlan(); setIsOpen(false); }}>
@@ -105,7 +116,7 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
             className="btn-primary mobile-cta-btn" 
             onClick={handleDiscoverClick}
           >
-            Discover Events
+            Explore Events
           </button>
         </div>
       )}
