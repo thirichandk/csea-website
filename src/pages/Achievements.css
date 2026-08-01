@@ -1,0 +1,165 @@
+.achievements-wrap { 
+  max-width: 1180px; margin: 0 auto;
+  font-family:'Inter', sans-serif;
+  color: #15130F;
+}
+
+/* ---- Hero ---- */
+.achievements-hero { text-align:center; margin-bottom: 64px; }
+.achievements-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#FFFFFF; border:1px solid #E7E1D3;
+  padding:9px 20px; border-radius:999px;
+  font-weight:600; font-size:13px; letter-spacing:.04em;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  margin-bottom: 28px;
+}
+.achievements-eyebrow svg { width:14px; height:14px; fill:#C79A2B; }
+h1.achievements-display {
+  font-family:'Poppins', sans-serif;
+  font-weight:900;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-size: clamp(40px, 7vw, 84px);
+  color: #15130F;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+h1.achievements-display .achievements-accent {
+  color: #FF5A1F;
+  -webkit-text-stroke: 0px;
+}
+.achievements-sub {
+  max-width: 640px; margin: 26px auto 0;
+  color: #6B675F; font-size: 16px; line-height:1.6;
+  letter-spacing:.01em;
+}
+
+/* ---- Stats ---- */
+.achievements-stats {
+  display:grid; grid-template-columns: repeat(4,1fr); gap:16px;
+  margin: 48px 0 60px;
+}
+.achievements-stat {
+  background:#FFFFFF; border:1px solid #E7E1D3;
+  border-radius: 22px;
+  padding: 26px 18px; text-align:center;
+}
+.achievements-stat .achievements-num {
+  font-family:'Poppins', sans-serif; font-weight:800; font-size: 34px; color:#15130F;
+}
+.achievements-stat .achievements-num span { color: #FF5A1F; }
+.achievements-stat .achievements-label { margin-top:6px; font-size:12.5px; color:#6B675F; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+
+/* ---- Filter tabs ---- */
+.achievements-tabs {
+  display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+  margin-bottom: 46px;
+}
+.achievements-tab {
+  border:1px solid #E7E1D3; background:#FFFFFF;
+  padding: 10px 22px; border-radius:999px;
+  font-weight:600; font-size:14px; color:#15130F;
+  cursor:pointer; transition: all .2s ease;
+}
+.achievements-tab:hover { border-color: #FF5A1F; color:#FF5A1F; }
+.achievements-tab.active { background: #FF5A1F; border-color:#FF5A1F; color:#fff; box-shadow: 0 6px 16px rgba(255,90,31,0.3); }
+
+/* ---- Grid ---- */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 26px;
+  justify-content: center;
+}
+.achievements-grid.single-card {
+  display: flex;
+  justify-content: center;
+}
+.achievements-grid.single-card .achievements-card {
+  max-width: 800px;
+  width: 100%;
+}
+@media (max-width: 900px){ .achievements-grid { grid-template-columns: repeat(2,1fr);} .achievements-stats {grid-template-columns: repeat(2,1fr);} }
+@media (max-width: 600px){ .achievements-grid { grid-template-columns: 1fr;} }
+
+.achievements-card {
+  position:relative;
+  background: #FFFFFF;
+  border: 1px solid #E7E1D3;
+  border-radius: 22px;
+  padding: 30px 26px 26px;
+  overflow:hidden;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+  text-align: left;
+}
+.achievements-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(20,15,10,0.12);
+  border-color: transparent;
+}
+
+/* signature: folded ribbon corner, like a medal tag */
+.achievements-ribbon {
+  position:absolute; top:0; left:0;
+  width:0; height:0;
+  border-top: 64px solid #FF5A1F;
+  border-right: 64px solid transparent;
+  transition: filter .3s ease;
+}
+.achievements-card[data-cat="research"] .achievements-ribbon { border-top-color: #C79A2B; }
+.achievements-card[data-cat="sports"] .achievements-ribbon { border-top-color: #2B6B4F; }
+.achievements-card[data-cat="placement"] .achievements-ribbon { border-top-color: #15130F; }
+.achievements-ribbon-icon {
+  position:absolute; top:8px; left:6px;
+  width:20px; height:20px; fill:#fff; opacity:.95;
+}
+
+.achievements-card .achievements-cat-label {
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
+  color: #FF5A1F;
+  margin-bottom:10px; padding-left: 4px;
+}
+.achievements-card[data-cat="research"] .achievements-cat-label { color:#C79A2B; }
+.achievements-card[data-cat="sports"] .achievements-cat-label { color:#2B6B4F; }
+.achievements-card[data-cat="placement"] .achievements-cat-label { color:#15130F; }
+
+.achievements-card-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.achievements-card h3 {
+  font-family:'Poppins', sans-serif; font-weight:800; font-size: 20px;
+  line-height:1.25; margin-bottom:10px; padding-left:4px; margin-top: 0;
+}
+.achievements-card p.achievements-desc {
+  color: #6B675F; font-size:14px; line-height:1.55;
+  padding-left:4px; margin-bottom: 18px; margin-top: 0;
+}
+.achievements-meta {
+  display:flex; align-items:center; gap:10px;
+  padding-left:4px; padding-top:16px; border-top:1px solid #E7E1D3;
+}
+.achievements-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background: linear-gradient(135deg, #FF5A1F, #C79A2B);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:700; font-size:13px; font-family:'Poppins', sans-serif;
+  flex-shrink:0;
+}
+.achievements-meta .achievements-name { font-weight:700; font-size:13.5px; color:#15130F; margin: 0; line-height: 1.2; }
+.achievements-meta .achievements-when { font-size:12px; color:#6B675F; margin: 0; line-height: 1.2; }
+
+/* ---- Footer CTA ---- */
+.achievements-more { text-align:center; margin-top: 54px; }
+.achievements-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background: #15130F; color:#fff; font-weight:700; font-size:14.5px;
+  padding: 15px 30px; border-radius:999px; border:none; cursor:pointer;
+  transition: background .25s ease, transform .25s ease;
+}
+.achievements-btn:hover { background: #E44A12; transform: translateY(-2px); }
