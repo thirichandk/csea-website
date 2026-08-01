@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { Menu, X, Home } from 'lucide-react';
 
-export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateAboutCSEA, onNavigateOffice, onNavigateYearPlan, onNavigateSDG }) {
+export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateAboutCSEA, onNavigateOffice, onNavigateYearPlan, onNavigateAchievements, onNavigateSDG }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -69,6 +69,13 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
           </button>
 
           <button
+            className={`nav-link-btn ${view === 'achievements' ? 'active' : ''}`}
+            onClick={() => { onNavigateAchievements(); setIsOpen(false); }}
+          >
+            <span>Achievements</span>
+          </button>
+
+          <button
             className={`nav-link-btn ${view === 'sdg' ? 'active' : ''}`}
             onClick={() => { onNavigateSDG(); setIsOpen(false); }}
           >
@@ -106,6 +113,10 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
 
           <button className="mobile-nav-link" onClick={() => { onNavigateYearPlan(); setIsOpen(false); }}>
             <span>Year Plan</span>
+          </button>
+
+          <button className="mobile-nav-link" onClick={() => { onNavigateAchievements(); setIsOpen(false); }}>
+            <span>Achievements</span>
           </button>
 
           <button className="mobile-nav-link" onClick={() => { onNavigateSDG(); setIsOpen(false); }}>
