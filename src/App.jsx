@@ -15,6 +15,7 @@ import EventModal from './components/EventModal';
 import OfficeBearers from './components/OfficeBearers';
 import YearPlan from './components/YearPlan';
 import SDGActivities from './pages/SDGActivities';
+import Achievements from './pages/Achievements';
 import { eventsData } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 
@@ -71,6 +72,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToAchievements = () => {
+    setView('achievements');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigateToSDGActivities = () => {
     setView('sdg');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -87,6 +93,7 @@ export default function App() {
         onNavigateAboutCSEA={handleNavigateToAboutCSEA}
         onNavigateOffice={handleNavigateToOfficeBearers}
         onNavigateYearPlan={handleNavigateToYearPlan}
+        onNavigateAchievements={handleNavigateToAchievements}
         onNavigateSDG={handleNavigateToSDGActivities}
       />
 
@@ -146,6 +153,15 @@ export default function App() {
                 </button>
               </div>
               <YearPlan />
+            </div>
+          </section>
+        )}
+
+        {view === 'achievements' && (
+          <section className="office-bearers-section">
+            <div className="container">
+
+              <Achievements />
             </div>
           </section>
         )}
