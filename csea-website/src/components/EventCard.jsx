@@ -46,6 +46,12 @@ export default function EventCard({ event, onViewDetails }) {
         {/* Stats / Quick Info Chips */}
         {event.stats && (
           <div className="card-stats-chips">
+            {event.academicYear && (
+              <span className="info-chip">
+                <Calendar size={12} />
+                <span>{event.academicYear}</span>
+              </span>
+            )}
             {event.stats.duration && (
               <span className="info-chip">
                 <Clock size={12} />

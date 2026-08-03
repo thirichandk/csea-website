@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Announcement from './components/Announcement';
 import About from './components/About';
 import VisionMission from './components/VisionMission';
 import Journey from './components/Journey';
@@ -18,32 +17,40 @@ import YearPlan from './components/YearPlan';
 import SDGActivities from './pages/SDGActivities';
 import { eventsData } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
-import Inaugural from './components/Inaugural';
 
 export default function App() {
   const [view, setView] = useState('home');
   useScrollReveal(view);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState('2026-2027');
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const getAcademicYear = (event) => {
+    if (event.academicYear) return event.academicYear;
+    if (event.date?.includes('2026')) return '2026-2027';
+    return '2025-2026';
+  };
+
+  const academicYearOptions = [...new Set(eventsData.map(getAcademicYear))].sort((a, b) => b.localeCompare(a));
 
   const filteredEvents = eventsData.filter((event) => {
     const matchesCategory = activeCategory === 'all' || event.category === activeCategory;
+    const matchesAcademicYear = getAcademicYear(event) === selectedAcademicYear;
     const matchesSearch = 
       event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (event.detailedDesc && event.detailedDesc.toLowerCase().includes(searchQuery.toLowerCase())) ||
       event.date.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+
+    if (selectedAcademicYear === '2026-2027') {
+      return matchesCategory && matchesAcademicYear && matchesSearch && event.id === 'csea-inaugural-2026-2027';
+    }
+
+    return matchesCategory && matchesAcademicYear && matchesSearch;
   });
 
   const handleNavigateToDiscover = (category = 'all') => {
-    // special-case the inaugural announcement to open a dedicated page
-    if (category === 'inaugural') {
-      setView('inaugural');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
     setActiveCategory(category);
     setView('discover');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -87,7 +94,6 @@ export default function App() {
         {view === 'home' && (
           <main>
             <Hero onDiscover={handleNavigateToDiscover} />
-            <Announcement onDiscover={handleNavigateToDiscover} />
             <About />
             <VisionMission />
             <Journey />
@@ -170,14 +176,29 @@ export default function App() {
               <div className="section-header-wrap">
                 <div className="section-badge">
                   <Sparkles size={16} className="sparkle-icon" />
-                  <span>CSEA CALENDAR 2025 - 2026</span>
+                  <span>CSEA CALENDAR {selectedAcademicYear}</span>
                 </div>
-                <h2 className="section-main-title">Discover CSEA Events</h2>
+                <h2 className="section-main-title">Recent Events Archive</h2>
                 <p className="section-subtitle">
-                  Browse through our chronological schedule of workshops, guest lectures, 
-                  bootcamps, and annual symposium activities designed for CSE students.
+                  Explore the completed events for the selected academic year. Use the year switcher to browse recent CSEA activity by cohort and session.
                 </p>
               </div>
+
+              <div className="filter-container glass-panel">
+                <div className="category-tabs">
+                  {academicYearOptions.map((year) => (
+                    <button
+                      key={year}
+                      className={`category-tab-btn ${selectedAcademicYear === year ? 'active' : ''}`}
+                      onClick={() => setSelectedAcademicYear(year)}
+                    >
+                      <Sparkles size={18} />
+                      <span>{year}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <CategoryFilter 
                 activeCategory={activeCategory}
                 setActiveCategory={setActiveCategory}
@@ -204,13 +225,6 @@ export default function App() {
           </section>
         )}
 
-        {view === 'inaugural' && (
-          <section className="inaugural-section">
-            <div className="container">
-              <Inaugural onBack={() => { setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
-            </div>
-          </section>
-        )}
       </div>
 
       <Footer />

@@ -1,4 +1,18 @@
 export const eventsData = [
+  {
+    id: "csea-inaugural-2026-2027",
+    title: "Inaugural of CSEA & CCC",
+    category: "major_event",
+    academicYear: "2026-2027",
+    date: "July 18, 2026",
+    time: "9:00 AM onwards",
+    shortDesc: "The formal inauguration of the Computer Science and Engineering Association and the CSE Coding Club for the current academic year.",
+    detailedDesc: "The inaugural ceremony marked the commencement of the 2026-2027 CSEA and CCC journey, bringing together students, faculty, and office bearers to celebrate the association’s upcoming calendar of technical, leadership, and innovation-driven activities.",
+    stats: {
+      duration: "1 Day",
+      type: "Inaugural Ceremony"
+    }
+  },
   // ==================== WORKSHOPS ====================
   {
     id: "fullstack-development",

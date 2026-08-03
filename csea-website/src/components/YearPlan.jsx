@@ -107,16 +107,16 @@ export default function YearPlan() {
               {sdgs.map((sdg) => (
                 <article
                   key={sdg.number}
-                  className={`group rounded-[1.35rem] border border-white/70 bg-gradient-to-br ${sdg.gradient} p-5 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+                  className={`group rounded-[1.35rem] border border-sky-100 bg-gradient-to-br ${sdg.gradient} p-5 text-slate-700 shadow-[0_16px_35px_-18px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
                 >
                   <div className="flex items-start justify-between">
-                    <span className="rounded-full bg-white/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em]">
+                    <span className="rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-sky-700 shadow-sm">
                       SDG {sdg.number}
                     </span>
                     <span className="text-2xl">{sdg.icon}</span>
                   </div>
-                  <h4 className="mt-5 text-lg font-semibold">{sdg.title}</h4>
-                  <p className="mt-2 text-sm leading-6 text-white/90">{sdg.description}</p>
+                  <h4 className="mt-5 text-lg font-semibold text-slate-900">{sdg.title}</h4>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{sdg.description}</p>
                 </article>
               ))}
             </div>

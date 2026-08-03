@@ -2,7 +2,7 @@ import React from 'react';
 import './VisionMission.css';
 
 const PodcastSection = () => {
-  const youtubeLink = 'https://youtu.be/r-eLB7n_IHA';
+  const youtubeLink = 'https://youtu.be/_liFf40muAc';
 
   return (
     <section className="section podcast-section" id="podcast">
