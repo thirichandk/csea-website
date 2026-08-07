@@ -110,6 +110,7 @@ h1.achievements-display .achievements-accent {
 .achievements-card[data-cat="research"] .achievements-ribbon { border-top-color: #C79A2B; }
 .achievements-card[data-cat="sports"] .achievements-ribbon { border-top-color: #2B6B4F; }
 .achievements-card[data-cat="placement"] .achievements-ribbon { border-top-color: #15130F; }
+.achievements-card[data-cat="academics"] .achievements-ribbon { border-top-color: #2563EB; }
 .achievements-ribbon-icon {
   position:absolute; top:8px; left:6px;
   width:20px; height:20px; fill:#fff; opacity:.95;
@@ -123,13 +124,47 @@ h1.achievements-display .achievements-accent {
 .achievements-card[data-cat="research"] .achievements-cat-label { color:#C79A2B; }
 .achievements-card[data-cat="sports"] .achievements-cat-label { color:#2B6B4F; }
 .achievements-card[data-cat="placement"] .achievements-cat-label { color:#15130F; }
+.achievements-card[data-cat="academics"] .achievements-cat-label { color:#2563EB; }
 
-.achievements-card-cover {
+.achievements-card-cover-wrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 12px;
   margin-bottom: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.achievements-card-cover-wrap .achievements-card-cover {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  margin-bottom: 0;
+  transition: transform 0.35s ease;
+}
+
+.achievements-card-cover-wrap:hover .achievements-card-cover {
+  transform: scale(1.04);
+}
+
+.achievements-card-cover-hint {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  gap: 8px;
+}
+
+.achievements-card-cover-wrap:hover .achievements-card-cover-hint {
+  opacity: 1;
 }
 
 .achievements-card h3 {
@@ -153,6 +188,84 @@ h1.achievements-display .achievements-accent {
 }
 .achievements-meta .achievements-name { font-weight:700; font-size:13.5px; color:#15130F; margin: 0; line-height: 1.2; }
 .achievements-meta .achievements-when { font-size:12px; color:#6B675F; margin: 0; line-height: 1.2; }
+
+/* ---- Lightbox Modal ---- */
+.achievements-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 13, 10, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.achievements-modal-content {
+  position: relative;
+  max-width: 92vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.achievements-modal-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.achievements-modal-title {
+  color: #ffffff;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.achievements-modal-close {
+  position: absolute;
+  top: -45px;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.achievements-modal-close:hover {
+  background: #FF5A1F;
+  border-color: #FF5A1F;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
 /* ---- Footer CTA ---- */
 .achievements-more { text-align:center; margin-top: 54px; }
