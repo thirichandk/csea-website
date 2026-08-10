@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Achievements.css';
+import AchievementCarousel from '../components/AchievementCarousel';
 import EnthusiaImg from '../assets/Achievements/Enthusia.png';
 import AgritechImg from '../assets/Achievements/Agritech.png';
 import InnoImg from '../assets/Achievements/Inno.jpeg';
@@ -9,6 +10,7 @@ import Outgoing2025Img from '../assets/Achievements/outgoing2025.png';
 export default function Achievements() {
   const [filter, setFilter] = useState('all');
   const [modalImage, setModalImage] = useState(null);
+  const [expandedCards, setExpandedCards] = useState({});
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -20,12 +22,18 @@ export default function Achievements() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const toggleExpand = (id) => {
+    setExpandedCards((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
   const cards = [
     {
+      id: 'outgoing-2025',
       cat: 'academics',
       catLabel: 'Academics',
       title: '🎓 Best Outgoing Student 2025 – Prasanndh Raaju',
       image: Outgoing2025Img,
+      summary: 'Prasanndh Raaju earned Best Outgoing Student 2025 through academic excellence, 24 papers, 30 projects, innovation funding, and global offers for MS study.',
       desc: (
         <>
           <strong>Best Outgoing Student 2025 (Roll No: 22CSR151)</strong>
@@ -48,10 +56,20 @@ export default function Achievements() {
       when: '2025'
     },
     {
+      id: 'sih-2024-innovisionersz',
       cat: 'hackathon',
       catLabel: 'Hackathon',
       title: '🏆 Winners – Smart India Hackathon (SIH) 2024',
       image: InnoImg,
+      summary: 'Team INNOVISIONERSZ won First Place at SIH 2024 with a national-level innovation solution and strong teamwork.',
+      teamMembers: [
+        'Mano Sundar M',
+        'Gowtham S',
+        'Kaviya P',
+        'Kavya P',
+        'Kalaiselvan K',
+        'Muthu Karuppan P'
+      ],
       desc: (
         <>
           <strong>National SIH 2024 Champions – Team INNOVISIONERSZ</strong>
@@ -76,10 +94,20 @@ export default function Achievements() {
       when: '2024'
     },
     {
+      id: 'sih-2024-vanguards',
       cat: 'hackathon',
       catLabel: 'Hackathon',
       title: '🏆 Winners – Smart India Hackathon (SIH) 2024',
       image: VanImg,
+      summary: 'Team VANGUARDS ELEVATE won SIH 2024 by building a high-impact technical solution and competing against top national teams.',
+      teamMembers: [
+        'Shree Varshana R',
+        'Tamilarasi P',
+        'Tharun S',
+        'Vaishnavi K',
+        'Vibudesh R B',
+        'Vignesh G'
+      ],
       desc: (
         <>
           <strong>National SIH 2024 Champions – Team VANGUARDS ELEVATE</strong>
@@ -104,10 +132,12 @@ export default function Achievements() {
       when: '2024'
     },
     {
+      id: 'enthusia-2026',
       cat: 'culturals',
       catLabel: 'Culturals',
       title: 'Best Performing Department at Enthusia 2K26',
       image: EnthusiaImg,
+      summary: 'CSEA earned Best Performing Department at Enthusia 2K26 by highlighting the department’s talent, teamwork, and event leadership.',
       desc: (
         <>
           <strong>Hard Work + Talent = Success!</strong>
@@ -124,10 +154,19 @@ export default function Achievements() {
       when: '2026'
     },
     {
+      id: 'agritech-2025',
       cat: 'hackathon',
       catLabel: 'Hackathon',
       title: '🥈 Second Prize – National Agritech Hackathon 2025',
       image: AgritechImg,
+      summary: 'The CSEA team secured Second Prize at National Agritech Hackathon 2025 with a real-world agricultural innovation and strong technical execution.',
+      teamMembers: [
+        'Thineshkumar S (24CSR328)',
+        'Thavanesh Muthu Raja M (24CSR325)',
+        'Thirichand K (24CSR329)',
+        'Vidulasri R D (24CSR342)',
+        'Sweta T (24CSR316)'
+      ],
       desc: (
         <>
           <strong>Innovation Beyond the Classroom</strong>
@@ -157,9 +196,13 @@ export default function Achievements() {
   ];
 
   const filteredCards = filter === 'all' ? cards : cards.filter(c => c.cat === filter);
+  const carouselItems = cards.map((c) => ({ image: c.image, title: c.title }));
+  const featuredCard = filteredCards[0];
+  const secondaryCards = filteredCards.slice(1);
 
   return (
     <div className="achievements-wrap">
+      <AchievementCarousel items={carouselItems} />
       <div className="achievements-hero">
         <div className="achievements-eyebrow">
           <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17l-5.9 3.2 1.2-6.6L2.5 9l6.6-.9z" /></svg>
@@ -178,37 +221,72 @@ export default function Achievements() {
         <div className={`achievements-tab ${filter === 'culturals' ? 'active' : ''}`} onClick={() => setFilter('culturals')}>Culturals</div>
       </div>
 
-      <div className={`achievements-grid ${filteredCards.length === 1 ? 'single-card' : ''}`}>
-        {filteredCards.map((c, i) => (
-          <div className="achievements-card" data-cat={c.cat} key={i}>
-            <div className="achievements-ribbon"></div>
-            <svg className="achievements-ribbon-icon" viewBox="0 0 24 24"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17l-5.9 3.2 1.2-6.6L2.5 9l6.6-.9z" /></svg>
-            <div className="achievements-cat-label">{c.catLabel}</div>
-            {c.image && (
-              <div className="achievements-card-cover-wrap" onClick={() => setModalImage({ src: c.image, title: c.title })}>
-                <img src={c.image} alt={c.title} className="achievements-card-cover" />
-                <div className="achievements-card-cover-hint">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    <line x1="11" y1="8" x2="11" y2="14"></line>
-                    <line x1="8" y1="11" x2="14" y2="11"></line>
-                  </svg>
-                  <span>Click to view full picture</span>
-                </div>
-              </div>
-            )}
-            <h3>{c.title}</h3>
-            <div className="achievements-desc">{c.desc}</div>
-            <div className="achievements-meta">
-              <div className="achievements-avatar">{c.avatar}</div>
-              <div>
-                <div className="achievements-name">{c.name}</div>
-                <div className="achievements-when">{c.when}</div>
-              </div>
+      <div className="achievement-showcase">
+        {featuredCard ? (
+          <article className="achievement-featured-card achievement-showcase-card" data-achievement-id={featuredCard.id}>
+            <div className="achievement-featured-media" onClick={() => setModalImage({ src: featuredCard.image, title: featuredCard.title })}>
+              <img src={featuredCard.image} alt={featuredCard.title} />
             </div>
+            <div className="achievement-featured-content">
+              <div className={`achievement-badge achievement-badge-${featuredCard.cat}`}>
+                {featuredCard.catLabel}
+              </div>
+              <h2 className="achievement-featured-title">{featuredCard.title}</h2>
+              <p className="achievement-featured-summary">{featuredCard.summary}</p>
+              <div className="achievement-featured-meta">
+                <span className="achievement-meta-pill">{featuredCard.catLabel}</span>
+                <span className="achievement-meta-year">{featuredCard.when}</span>
+              </div>
+              <div className="achievement-featured-actions">
+                <button
+                  className="achievement-action-link"
+                  onClick={() => toggleExpand(featuredCard.id)}
+                  aria-expanded={!!expandedCards[featuredCard.id]}
+                >
+                  {expandedCards[featuredCard.id] ? 'Show less about achievement' : 'Read full achievement'}
+                </button>
+              </div>
+              {expandedCards[featuredCard.id] && (
+                <div className="achievement-expanded-content">
+                  {featuredCard.desc}
+                </div>
+              )}
+            </div>
+          </article>
+        ) : (
+          <div className="achievement-empty-state">No achievements found for this filter.</div>
+        )}
+
+        {secondaryCards.length > 0 && (
+          <div className="achievement-secondary-grid">
+            {secondaryCards.map((c) => (
+              <article key={c.id} className="achievement-card-small achievement-showcase-card" data-achievement-id={c.id}>
+                <div className="achievement-card-image" onClick={() => setModalImage({ src: c.image, title: c.title })}>
+                  <img src={c.image} alt={c.title} />
+                </div>
+                <div className="achievement-card-body">
+                  <div className={`achievement-badge achievement-badge-${c.cat}`}>{c.catLabel}</div>
+                  <h3>{c.title}</h3>
+                  <p className="achievement-card-summary">
+                    {expandedCards[c.id] ? '' : c.summary}
+                  </p>
+                  {expandedCards[c.id] && <div className="achievement-expanded-content">{c.desc}</div>}
+                  <div className="achievement-card-meta-row">
+                    <span>{c.when}</span>
+                    {c.teamMembers && <span>{c.teamMembers.length} team members</span>}
+                  </div>
+                  <button
+                    className="achievement-action-link"
+                    onClick={() => toggleExpand(c.id)}
+                    aria-expanded={!!expandedCards[c.id]}
+                  >
+                    {expandedCards[c.id] ? 'Collapse details' : 'Read more'}
+                  </button>
+                </div>
+              </article>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       <div className="achievements-more"><button className="achievements-btn">View All Achievements</button></div>

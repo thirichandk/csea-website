@@ -2,7 +2,7 @@ import React from 'react';
 import './VisionMission.css';
 
 const PodcastSection = () => {
-  const youtubeLink = 'https://youtu.be/_liFf40muAc';
+  const youtubeLink = 'https://youtu.be/E9msq7ehc4E';
 
   return (
     <section className="section podcast-section" id="podcast">
@@ -10,7 +10,7 @@ const PodcastSection = () => {
         <div className="podcast-card reveal">
           <div className="podcast-media">
             <img
-              src="/src/assets/podcast.jpg"
+              src="/src/assets/podcast2.jpg"
               alt="CSE Voice podcast"
               className="podcast-image"
               onError={(e) => {
