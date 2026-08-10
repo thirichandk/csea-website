@@ -1,5 +1,6 @@
 import React from 'react';
-import './VisionMission.css';
+import './PodcastSection.css';
+import podcastImage from '../assets/podcast2.jpg';
 
 const PodcastSection = () => {
   const youtubeLink = 'https://youtu.be/E9msq7ehc4E';
@@ -10,7 +11,7 @@ const PodcastSection = () => {
         <div className="podcast-card reveal">
           <div className="podcast-media">
             <img
-              src="/src/assets/podcast2.jpg"
+              src={podcastImage}
               alt="CSE Voice podcast"
               className="podcast-image"
               onError={(e) => {
@@ -19,7 +20,7 @@ const PodcastSection = () => {
             />
           </div>
           <div className="podcast-content">
-            <div className="section-badge">CSE VOICE</div>
+            <div className="section-badge">C S E&nbsp;V O I C E</div>
             <h2 className="podcast-title">Podcast Series</h2>
             <p className="podcast-description">
               CSE Voice is a platform where students and professionals share inspiring stories, technical insights, and real-world experiences that shape the future of computing.

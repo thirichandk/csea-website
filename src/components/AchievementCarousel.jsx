@@ -24,12 +24,12 @@ export default function AchievementCarousel({ items }) {
     }, 4500);
   };
 
+  const CAROUSEL_INTERVAL = 2000;
+
   const handleInteraction = () => {
     setIsPaused(true);
     scheduleAutoResume();
   };
-
-  const AUTOPLAY_DELAY = 3000;
 
   useEffect(() => {
     if (isPaused) {
@@ -38,7 +38,7 @@ export default function AchievementCarousel({ items }) {
 
     const timer = window.setTimeout(() => {
       showNext();
-    }, AUTOPLAY_DELAY);
+    }, CAROUSEL_INTERVAL);
 
     return () => window.clearTimeout(timer);
   }, [activeIndex, isPaused, itemCount]);
