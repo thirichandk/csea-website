@@ -1,9 +1,9 @@
 import React from 'react';
 import './PodcastSection.css';
-import podcastImage from '../assets/podcast2.jpg';
+import podcastImage from '../assets/podcast3.jpg';
 
 const PodcastSection = () => {
-  const youtubeLink = 'https://youtu.be/E9msq7ehc4E';
+  const youtubeLink = 'https://youtu.be/2Du9UijuQeg?si=RyAsIgHRTfQtepci';
 
   return (
     <section className="section podcast-section" id="podcast">
