@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -16,16 +16,61 @@ import OfficeBearers from './components/OfficeBearers';
 import YearPlan from './components/YearPlan';
 import SDGActivities from './pages/SDGActivities';
 import Achievements from './pages/Achievements';
+import UpcomingEvents from './pages/UpcomingEvents';
+import UpcomingEventDetails from './pages/UpcomingEventDetails';
+import UpcomingEventModal from './components/UpcomingEventModal';
+import { getUpcomingEvents } from './data/upcomingEvents';
 import { eventsData } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 
+const getRoute = () => {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  if (parts[0] !== 'upcoming-events') return { view: 'home', eventId: null };
+  return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
+};
+
 export default function App() {
-  const [view, setView] = useState('home');
+  const initialRoute = getRoute();
+  const [view, setView] = useState(initialRoute.view);
+  const [eventId, setEventId] = useState(initialRoute.eventId);
   useScrollReveal(view);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAcademicYear, setSelectedAcademicYear] = useState('2026-2027');
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const previousView = useRef(view);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = getRoute();
+      setView(route.view);
+      setEventId(route.eventId);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (previousView.current !== 'home' && view === 'home' && window.location.pathname.startsWith('/upcoming-events')) {
+      window.history.replaceState({}, '', '/');
+    }
+    previousView.current = view;
+  }, [view]);
+
+  const handleUpcomingEventNavigation = (nextEventId = null) => {
+    const nextPath = nextEventId ? `/upcoming-events/${nextEventId}` : '/upcoming-events';
+    window.history.pushState({}, '', nextPath);
+    setEventId(nextEventId);
+    setView(nextEventId ? 'upcoming-event-details' : 'upcoming-events');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackFromUpcomingEvent = () => {
+    window.history.pushState({}, '', '/upcoming-events');
+    setEventId(null);
+    setView('upcoming-events');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const getAcademicYear = (event) => {
     if (event.academicYear) return event.academicYear;
@@ -98,6 +143,9 @@ export default function App() {
       />
 
       <div key={view} style={{ animation: 'fadeInUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
+        {view === 'upcoming-events' && <UpcomingEvents onBack={() => { window.history.pushState({}, '', '/'); setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} onViewDetails={handleUpcomingEventNavigation} />}
+        {view === 'upcoming-event-details' && <UpcomingEventDetails eventId={eventId} onBack={handleBackFromUpcomingEvent} />}
+
         {view === 'home' && (
           <main>
             <Hero onDiscover={handleNavigateToDiscover} />
@@ -248,6 +296,8 @@ export default function App() {
       {selectedEvent && (
         <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}
+
+      <UpcomingEventModal events={getUpcomingEvents()} onViewEvent={handleUpcomingEventNavigation} onViewAll={() => handleUpcomingEventNavigation()} />
     </div>
   );
 }
