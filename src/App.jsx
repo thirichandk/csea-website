@@ -11,7 +11,6 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 
 import CategoryFilter from './components/CategoryFilter';
 import EventCard from './components/EventCard';
-import EventModal from './components/EventModal';
 import OfficeBearers from './components/OfficeBearers';
 import YearPlan from './components/YearPlan';
 import SDGActivities from './pages/SDGActivities';
@@ -19,12 +18,15 @@ import Achievements from './pages/Achievements';
 import UpcomingEvents from './pages/UpcomingEvents';
 import UpcomingEventDetails from './pages/UpcomingEventDetails';
 import UpcomingEventModal from './components/UpcomingEventModal';
+import UpcomingEventsAccess from './components/UpcomingEventsAccess';
+import CompletedEventDetails from './pages/CompletedEventDetails';
 import { getUpcomingEvents } from './data/upcomingEvents';
-import { eventsData } from './data/events';
+import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 
 const getRoute = () => {
   const parts = window.location.pathname.split('/').filter(Boolean);
+  if (parts[0] === 'explore-events') return { view: parts[1] ? 'completed-event-details' : 'discover', eventId: parts[1] || null };
   if (parts[0] !== 'upcoming-events') return { view: 'home', eventId: null };
   return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
 };
@@ -37,7 +39,6 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAcademicYear, setSelectedAcademicYear] = useState('2026-2027');
-  const [selectedEvent, setSelectedEvent] = useState(null);
   const previousView = useRef(view);
 
   useEffect(() => {
@@ -74,8 +75,12 @@ export default function App() {
 
   const getAcademicYear = (event) => {
     if (event.academicYear) return event.academicYear;
-    if (event.date?.includes('2026')) return '2026-2027';
-    return '2025-2026';
+    const yearMatch = event.date?.match(/\b(20\d{2})\b/);
+    if (!yearMatch) return '2025-2026';
+    const year = Number(yearMatch[1]);
+    const monthNames = ['january', 'february', 'march', 'april', 'may', 'june'];
+    const month = event.date.trim().split(/\s+/)[0].toLowerCase();
+    return monthNames.includes(month) ? `${year - 1}-${year}` : `${year}-${year + 1}`;
   };
 
   const academicYearOptions = [...new Set(eventsData.map(getAcademicYear))].sort((a, b) => b.localeCompare(a));
@@ -89,11 +94,7 @@ export default function App() {
       (event.detailedDesc && event.detailedDesc.toLowerCase().includes(searchQuery.toLowerCase())) ||
       event.date.toLowerCase().includes(searchQuery.toLowerCase());
 
-    if (selectedAcademicYear === '2026-2027') {
-      return matchesCategory && matchesAcademicYear && matchesSearch && event.id === 'csea-inaugural-2026-2027';
-    }
-
-    return matchesCategory && matchesAcademicYear && matchesSearch;
+    return matchesCategory && matchesAcademicYear && matchesSearch && getEventStatus(event) === 'completed';
   });
 
   const handleNavigateToDiscover = (category = 'all') => {
@@ -127,6 +128,22 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleCompletedEventNavigation = (event) => {
+    window.history.pushState({}, '', `/explore-events/${event.id}`);
+    setEventId(event.id);
+    setView('completed-event-details');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackFromCompletedEvent = () => {
+    window.history.pushState({}, '', '/explore-events');
+    setEventId(null);
+    setView('discover');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleUpcomingAccess = () => handleUpcomingEventNavigation();
+
   return (
     <div className="app-wrapper">
       <Navbar 
@@ -145,6 +162,7 @@ export default function App() {
       <div key={view} style={{ animation: 'fadeInUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
         {view === 'upcoming-events' && <UpcomingEvents onBack={() => { window.history.pushState({}, '', '/'); setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} onViewDetails={handleUpcomingEventNavigation} />}
         {view === 'upcoming-event-details' && <UpcomingEventDetails eventId={eventId} onBack={handleBackFromUpcomingEvent} />}
+        {view === 'completed-event-details' && <CompletedEventDetails eventId={eventId} onBack={handleBackFromCompletedEvent} />}
 
         {view === 'home' && (
           <main>
@@ -272,7 +290,7 @@ export default function App() {
               {filteredEvents.length > 0 ? (
                 <div className="events-grid">
                   {filteredEvents.map((event) => (
-                    <EventCard key={event.id} event={event} onViewDetails={setSelectedEvent} />
+                    <EventCard key={event.id} event={event} onViewDetails={handleCompletedEventNavigation} />
                   ))}
                 </div>
               ) : (
@@ -293,11 +311,8 @@ export default function App() {
 
       <Footer />
 
-      {selectedEvent && (
-        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-      )}
-
       <UpcomingEventModal events={getUpcomingEvents()} onViewEvent={handleUpcomingEventNavigation} onViewAll={() => handleUpcomingEventNavigation()} />
+      <UpcomingEventsAccess count={getUpcomingEvents().length} onNavigate={handleUpcomingAccess} />
     </div>
   );
 }

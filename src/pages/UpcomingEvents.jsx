@@ -14,8 +14,8 @@ export default function UpcomingEvents({ onBack, onViewDetails }) {
         <button className="upcoming-back-link" onClick={onBack}>Back to Home</button>
         <section className="upcoming-hero reveal">
           <div className="section-badge"><Sparkles size={15} /> UPCOMING EVENTS</div>
-          <h1>Discover what's happening at CSEA</h1>
-          <p className="upcoming-hero-subtitle">Workshops, ideas, and opportunities worth showing up for.</p>
+          <h1>What's happening at CSEA</h1>
+          <p className="upcoming-hero-subtitle">Discover workshops, learning sessions and opportunities designed to help you learn, connect and grow.</p>
         </section>
         <section className="upcoming-events-grid">
           {events.map((event) => <UpcomingEventCard key={event.id} event={event} onViewDetails={onViewDetails} />)}

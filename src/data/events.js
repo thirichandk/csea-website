@@ -1,9 +1,61 @@
+import sihPoster from '../assets/sih.png';
+import linkedinPoster from '../assets/linkedin.jpeg';
+import datasetToDecisionPoster from '../assets/datasettodecision.jpg';
+import inauguralPoster from '../assets/inaugural-invitation.jpg';
+
 export const eventsData = [
+  {
+    id: 'sih-2026-workshop',
+    eventDate: '2026-08-24',
+    academicYear: '2026-2027',
+    status: 'upcoming',
+    title: 'SIH 2026 Workshop - Full Stack Solutions for SIH',
+    shortTitle: 'SIH 2026 Workshop',
+    subtitle: 'Full Stack Solutions for SIH',
+    description: 'Join us for an insightful workshop on Smart India Hackathon (SIH) and learn how to transform innovative ideas into impactful full-stack solutions.',
+    shortDesc: 'Learn how to transform innovative ideas into impactful full-stack solutions for Smart India Hackathon.',
+    detailedDesc: 'Join us for an insightful workshop on Smart India Hackathon (SIH) and learn how to transform innovative ideas into impactful full-stack solutions.',
+    date: '24 August 2026',
+    time: '8:45 AM - 4:15 PM',
+    venue: 'Admin Block, CC15',
+    speakerLabel: 'Featured Guest',
+    speaker: { name: 'Ms. R. Shree Varshana', achievement: 'SIH Winner - 2024', designation: 'Advanced Associate Software Engineer', organization: 'Accenture, Chennai' },
+    eligibility: 'All eligible students',
+    message: 'Learn, innovate, collaborate, and get inspired for SIH 2026!',
+    poster: sihPoster,
+    registrationUrl: 'https://forms.gle/WSTNCKjfsrF9eFae6',
+    category: 'workshop'
+  },
+  {
+    id: 'linkedin-placement-workshop',
+    eventDate: '2026-08-24',
+    academicYear: '2026-2027',
+    status: 'upcoming',
+    title: 'Leveraging LinkedIn for Placements and Career Growth',
+    shortTitle: 'Level Up Your LinkedIn Presence!',
+    subtitle: 'LEVEL UP YOUR LINKEDIN PRESENCE!',
+    description: 'Learn how to use LinkedIn effectively to build your professional profile, connect with recruiters, discover job opportunities, and improve your placement prospects.',
+    shortDesc: 'Build a stronger professional profile and use LinkedIn strategically for placements, internships, and career growth.',
+    detailedDesc: 'The Computer Science and Engineering Association presents a special workshop on using LinkedIn strategically for placements, internships, networking, personal branding, and career growth.',
+    date: '24 August 2026',
+    time: '8:45 AM - 4:15 PM',
+    venue: 'SRINIVASA RAMANUJAN HALL',
+    speakerLabel: 'Featured Speaker',
+    speaker: { name: 'Mr. B. Ahamad Thowfeek', designation: 'Product Designer & Full Stack Developer', organization: 'Founder - Combo Square' },
+    eligibility: 'Exclusively for II & III Year Students',
+    organizedBy: 'Computer Science and Engineering Association (CSEA), Kongu Engineering College',
+    message: "Don't just create a LinkedIn profile - learn how to turn it into a powerful career opportunity!",
+    poster: linkedinPoster,
+    registrationUrl: 'https://forms.gle/4FK4pxReNQwnD3it7',
+    category: 'workshop'
+  },
   {
     id: "csea-inaugural-2026-2027",
     title: "Inaugural of CSEA & CCC",
     category: "major_event",
     academicYear: "2026-2027",
+    status: "completed",
+    poster: inauguralPoster,
     date: "July 18, 2026",
     time: "9:00 AM onwards",
     shortDesc: "The formal inauguration of the Computer Science and Engineering Association and the CSE Coding Club for the current academic year.",
@@ -12,6 +64,22 @@ export const eventsData = [
       duration: "1 Day",
       type: "Inaugural Ceremony"
     }
+  },
+  {
+    id: 'dataset-to-decision-2026',
+    title: 'Dataset To Decision Workshop',
+    category: 'workshop',
+    academicYear: '2026-2027',
+    status: 'completed',
+    poster: datasetToDecisionPoster,
+    date: 'August 01, 2026 (Saturday)',
+    time: '8:45 AM - 4:15 PM',
+    venue: 'ITP CC16',
+    shortDesc: 'A workshop on gathering insights and refining processes into informed decisions.',
+    detailedDesc: 'Dataset To Decision Workshop featuring chief guest Mr. M R Prasandh Raaju, B.E. (Hons.), Senior GenAI Developer at CubeAISolutions Tech Pvt Ltd.',
+    speaker: { name: 'Mr. M R Prasandh Raaju', designation: 'B.E. (Hons.)', organization: 'Senior GenAI Developer, CubeAISolutions Tech Pvt Ltd' },
+    eligibility: 'For II Year students',
+    stats: { duration: '1 Day', type: 'Workshop' }
   },
   // ==================== WORKSHOPS ====================
   {
@@ -319,3 +387,11 @@ export const eventsData = [
     }
   }
 ];
+
+export const getEventStatus = (event, now = new Date()) => {
+  if (event.status) return event.status;
+  if (!event.eventDate) return 'completed';
+  return new Date(`${event.eventDate}T23:59:59`) >= now ? 'upcoming' : 'completed';
+};
+
+export const getCompletedEvents = () => eventsData.filter((event) => getEventStatus(event) === 'completed');

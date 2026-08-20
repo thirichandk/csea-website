@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, MapPin, Users, ChevronRight, Award } from 'lucide-react';
+import { Calendar, Clock, Users, ChevronRight, Award } from 'lucide-react';
 
 export default function EventCard({ event, onViewDetails }) {
   const getCategoryMeta = (cat) => {
@@ -30,7 +30,7 @@ export default function EventCard({ event, onViewDetails }) {
       <div className="card-body">
         {/* Badge & Date Header */}
         <div className="card-header-meta">
-          <span className={`category-badge ${meta.className}`}>{meta.label}</span>
+          <span className={`category-badge ${meta.className}`}>{event.status === 'completed' ? 'Completed' : meta.label}</span>
           <div className="card-date-wrapper">
             <Calendar size={14} className="date-icon" />
             <span className="card-date">{event.date}</span>
@@ -38,6 +38,7 @@ export default function EventCard({ event, onViewDetails }) {
         </div>
 
         {/* Title */}
+        {event.poster && <img className="archive-event-poster" src={event.poster} alt={`${event.title} poster`} loading="lazy" />}
         <h3 className="card-title">{event.title}</h3>
 
         {/* Short Description */}

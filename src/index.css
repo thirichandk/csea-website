@@ -995,6 +995,16 @@ a {
   background: rgba(0, 0, 0, 0.035);
 }
 
+.archive-event-poster {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  margin: 20px 0 22px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: var(--bg-secondary);
+}
+
 .card-footer-action {
   display: flex;
   justify-content: space-between;

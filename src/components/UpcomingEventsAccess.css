@@ -1,0 +1,8 @@
+.upcoming-events-access { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(22px, env(safe-area-inset-bottom)); z-index: 900; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 15px; border: 1px solid rgba(17, 17, 21, .14); border-radius: 12px; background: rgba(255, 250, 244, .96); color: var(--text-primary); box-shadow: 0 8px 22px rgba(17, 17, 21, .12); backdrop-filter: blur(12px); font: 700 13px var(--font-heading); cursor: pointer; animation: event-access-in .55s ease-out both; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.upcoming-events-access svg { color: var(--primary); }
+.upcoming-events-access:hover { border-color: var(--primary); box-shadow: 0 13px 32px rgba(17, 17, 21, .18); transform: translateY(-2px); }
+.upcoming-events-access:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.upcoming-events-access-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--secondary); box-shadow: 0 0 0 3px rgba(255, 179, 0, .15); }
+@keyframes event-access-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) { .upcoming-events-access { right: max(14px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); min-height: 44px; padding: 0 14px; } }
+@media (prefers-reduced-motion: reduce) { .upcoming-events-access { animation: none; transition: none; } }

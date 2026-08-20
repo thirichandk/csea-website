@@ -1,0 +1,22 @@
+.completed-event-page { padding: 32px 0 110px; }
+.completed-event-hero { max-width: 850px; margin: 54px auto 48px; text-align: center; }
+.completed-event-hero h1 { margin-top: 14px; font-size: clamp(38px, 7vw, 72px); line-height: .98; }
+.completed-event-year { margin: 24px 0 8px; color: var(--primary); font: 800 13px var(--font-heading); letter-spacing: .16em; }
+.completed-event-intro { margin-top: 15px; color: var(--text-secondary); font: 600 20px var(--font-heading); }
+.completed-event-layout { display: grid; grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr); gap: clamp(28px, 6vw, 72px); align-items: start; max-width: 1080px; margin: auto; }
+.completed-event-poster { display: block; width: 100%; max-height: 700px; object-fit: contain; border-radius: 18px; background: var(--bg-secondary); box-shadow: 0 18px 50px rgba(17, 17, 21, .12); }
+.completed-event-content { padding-top: 8px; }
+.completed-event-status { display: inline-flex; padding: 7px 11px; border-radius: 999px; background: rgba(255, 87, 34, .11); color: var(--primary); font: 800 11px var(--font-heading); letter-spacing: .14em; text-transform: uppercase; }
+.completed-event-content h2 { margin: 18px 0 14px; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; }
+.completed-event-content > p { color: var(--text-secondary); line-height: 1.7; }
+.completed-event-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+.completed-event-meta > div { display: flex; align-items: flex-start; gap: 10px; min-width: 0; padding: 16px; border: 1px solid var(--border-glass); border-radius: 12px; background: var(--bg-card); }
+.completed-event-meta svg { flex: 0 0 auto; color: var(--primary); }
+.completed-event-meta span { display: grid; gap: 4px; color: var(--text-secondary); font-size: 14px; overflow-wrap: anywhere; }
+.completed-event-meta strong { color: var(--text-primary); font: 800 11px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; }
+.completed-event-speaker { margin-top: 18px; padding: 24px; border-radius: 16px; background: var(--text-primary); color: #fff; }
+.completed-event-speaker > span { color: #ffc9b8; font: 800 11px var(--font-heading); letter-spacing: .14em; text-transform: uppercase; }
+.completed-event-speaker h3 { margin: 10px 0 8px; color: #fff; font-size: 27px; }
+.completed-event-speaker p { color: rgba(255, 255, 255, .72); line-height: 1.5; }
+@media (max-width: 720px) { .completed-event-page { padding-top: 24px; } .completed-event-hero { margin-top: 36px; margin-bottom: 34px; } .completed-event-layout { grid-template-columns: 1fr; gap: 30px; } .completed-event-poster { max-height: 620px; } .completed-event-meta { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .completed-event-page .reveal { animation: none; } }
