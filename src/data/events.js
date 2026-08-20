@@ -20,7 +20,7 @@ export const eventsData = [
     venue: 'Admin Block, CC15',
     speakerLabel: 'Featured Guest',
     speaker: { name: 'Ms. R. Shree Varshana', achievement: 'SIH Winner - 2024', designation: 'Advanced Associate Software Engineer', organization: 'Accenture, Chennai' },
-    eligibility: 'All eligible students',
+    eligibility: 'Only for second years',
     message: 'Learn, innovate, collaborate, and get inspired for SIH 2026!',
     poster: sihPoster,
     registrationUrl: 'https://forms.gle/WSTNCKjfsrF9eFae6',
