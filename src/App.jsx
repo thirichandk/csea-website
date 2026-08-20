@@ -13,6 +13,7 @@ import CategoryFilter from './components/CategoryFilter';
 import EventCard from './components/EventCard';
 import OfficeBearers from './components/OfficeBearers';
 import YearPlan from './components/YearPlan';
+import PlasticCampaign from './components/PlasticCampaign';
 import SDGActivities from './pages/SDGActivities';
 import Achievements from './pages/Achievements';
 import UpcomingEvents from './pages/UpcomingEvents';
@@ -27,8 +28,9 @@ import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 const getRoute = () => {
   const parts = window.location.pathname.split('/').filter(Boolean);
   if (parts[0] === 'explore-events') return { view: parts[1] ? 'completed-event-details' : 'discover', eventId: parts[1] || null };
-  if (parts[0] !== 'upcoming-events') return { view: 'home', eventId: null };
-  return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
+  if (parts[0] === 'sdg') return { view: parts[1] === 'say-no-to-plastic' ? 'plastic-campaign' : 'sdg', eventId: null };
+  if (parts[0] === 'upcoming-events') return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
+  return { view: 'home', eventId: null };
 };
 
 export default function App() {
@@ -124,7 +126,14 @@ export default function App() {
   };
 
   const handleNavigateToSDGActivities = () => {
+    window.history.pushState({}, '', '/sdg');
     setView('sdg');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateToPlasticCampaign = () => {
+    window.history.pushState({}, '', '/sdg/say-no-to-plastic');
+    setView('plastic-campaign');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -236,12 +245,26 @@ export default function App() {
           <section className="sdg-section">
             <div className="container">
               <div className="back-nav-wrapper">
-                <button className="btn-back-home" onClick={() => { setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <button className="btn-back-home" onClick={() => { window.history.pushState({}, '', '/'); setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
                   <ArrowLeft size={16} />
                   <span>Back to Home</span>
                 </button>
               </div>
-              <SDGActivities />
+              <SDGActivities onOpenCampaign={handleNavigateToPlasticCampaign} />
+            </div>
+          </section>
+        )}
+
+        {view === 'plastic-campaign' && (
+          <section className="sdg-section">
+            <div className="container">
+              <div className="back-nav-wrapper">
+                <button className="btn-back-home" onClick={() => { window.history.pushState({}, '', '/sdg'); setView('sdg'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                  <ArrowLeft size={16} />
+                  <span>Back to SDG Activities</span>
+                </button>
+              </div>
+              <PlasticCampaign />
             </div>
           </section>
         )}

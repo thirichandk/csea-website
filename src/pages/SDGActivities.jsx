@@ -39,18 +39,33 @@ const placeholderCards = Array.from({ length: 3 }, (_, index) => ({
   description: 'More SDG initiatives are being prepared to inspire student leadership, innovation, and responsible engineering.',
 }));
 
-export default function SDGActivities() {
+export default function SDGActivities({ onOpenCampaign }) {
   return (
     <section className="sdg-activities-page">
-      <div className="sdg-hero glass-panel">
-        <div className="sdg-hero-copy">
-          <span className="section-badge-blue">SDG Activities</span>
-          <h1>SDG Activities</h1>
-          <p>Our initiatives aligned with the United Nations Sustainable Development Goals (SDGs) to create awareness, inspire innovation, and promote sustainable development among students.</p>
-        </div>
-      </div>
-
       <div className="sdg-content container">
+        <article className="sdg-campaign-card glass-panel">
+          <div className="sdg-campaign-copy">
+            <div className="sdg-card-meta">
+              <span>15 August 2026 – 31 August 2026</span>
+              <div className="sdg-badges">
+                <span className="sdg-badge">SDG 12</span>
+                <span className="sdg-badge">SDG 15</span>
+              </div>
+            </div>
+            <h2>SAY NO TO PLASTIC</h2>
+            <h3>17 Days • One Mission • A Cleaner Tomorrow</h3>
+            <p>CSEA's plastic-awareness initiative brings students together to understand plastic pollution, make responsible choices, and build practical habits for a cleaner tomorrow.</p>
+            <button type="button" className="sdg-campaign-button" onClick={onOpenCampaign}>
+              Explore Campaign
+            </button>
+          </div>
+        </article>
+
+        <div className="sdg-existing-activities-header">
+          <span className="section-badge-blue">MORE SDG ACTIVITIES</span>
+          <h2>More SDG Activities</h2>
+        </div>
+
         <section className="sdg-awareness-section glass-panel">
           <div className="sdg-awareness-layout">
             <div className="sdg-awareness-grid">
