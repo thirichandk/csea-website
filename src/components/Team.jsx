@@ -22,7 +22,7 @@ function findImage(hint) {
 
 const teamMembers = [
   {
-    name: 'Mr. M. R. Prasandh Raju',
+    name: 'Mr. M. R. Prasanndh Raaju',
     role: 'M. S in Data Science and Machine Learning, University of Oldenbourg, Germany',
     academicYear: '2025-2026',
     imgKey: 'prashandh'

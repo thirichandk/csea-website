@@ -16,9 +16,12 @@ import clean1 from '../assets/clean1.jpg';
 import clean2 from '../assets/clean2.jpg';
 import clean3 from '../assets/clean3.jpg';
 import clean4 from '../assets/clean4.jpg';
+import clean5 from '../assets/clean5.png';
+import clean6 from '../assets/clean6.jpg';
+import clean7 from '../assets/clean7.png';
 
 const pledgeImages = [pledge1, pledge2, pledge3, pledge4];
-const cleaningImages = [clean1, clean2, clean3, clean4];
+const cleaningImages = [clean1, clean2, clean3, clean4, clean5, clean6, clean7];
 
 const campaignStart = new Date(2026, 7, 15);
 const campaignEnd = new Date(2026, 7, 31, 23, 59, 59);
@@ -34,7 +37,7 @@ const detailedDays = [
     category: 'AWARENESS',
     poster: day1,
     summary: 'Small change. Big impact. 🌍💚',
-    description: 'DAY 01 — SWITCH TO REUSABLE ♻️\n\nSmall change. Big impact. 🌍💚\n\nThe Computer Science and Engineering Association (CSEA) brings you Day 01 of our Plastic-Free Awareness Initiative — encouraging everyone to take a simple step towards a cleaner and greener future.\n\n🛍️ Carry a reusable bag\n\n🥤 Choose reusable alternatives\n\n🚫 Say NO to single-use plastic\n\n🎥 Watch our awareness reel:\n\nhttps://www.instagram.com/reel/DcDPI6oNtPW/?igsh=MTVhNzN1c2ZjajkwNQ==\n\nLet’s make sustainability a habit, not just a campaign. 🌱\n\nOne bag. One choice. One positive change. 💚',
+    description: 'DAY 01 — SWITCH TO REUSABLE ♻️\n\nSmall change. Big impact. 🌍💚\n\nThe Computer Science and Engineering Association (CSEA) brings you Day 01 of our Plastic-Free Awareness Initiative — encouraging everyone to take a simple step towards a cleaner and greener future.\n\n🛍️ Carry a reusable bag\n\n🥤 Choose reusable alternatives\n\n🚫 Say NO to single-use plastic\n\n🎥 Watch our awareness reel:\n\nLet’s make sustainability a habit, not just a campaign. 🌱\n\nOne bag. One choice. One positive change. 💚',
     instagramUrl: 'https://www.instagram.com/reel/DcDPI6oNtPW/?igsh=MTVhNzN1c2ZjajkwNQ==',
   },
   {
@@ -90,7 +93,7 @@ const detailedDays = [
     category: 'AWARENESS',
     poster: day7,
     summary: 'Small Choices. Big Impact.',
-    description: 'Going plastic-free starts with the choices we make every day.\n\n👜 Choose reusable, not disposable.\n\n♻️ Reduce. Reuse. Rethink.\n\n🌍 Protect the future through the choices we make today.\n\nA small change in our daily habits can create a much bigger impact on our environment.\n\n🎥 Watch our Day 07 awareness reel and share it with your friends:\n\nInstagram reel:\n\nhttps://www.instagram.com/reel/DcSgkFUtoMW/?igsi=MW9qYzZ4NWU2b3M4OA==\n\nClosing line:\n\nChoose Reuse. Protect the Future. 🌱\n\n— CSEA | Say No to Plastic',
+    description: 'Going plastic-free starts with the choices we make every day.\n\n👜 Choose reusable, not disposable.\n\n♻️ Reduce. Reuse. Rethink.\n\n🌍 Protect the future through the choices we make today.\n\nA small change in our daily habits can create a much bigger impact on our environment.\n\n🎥 Watch our Day 07 awareness reel and share it with your friends:\n\nInstagram reel:\n\nClosing line:\n\nChoose Reuse. Protect the Future. 🌱\n\n— CSEA | Say No to Plastic',
     instagramUrl: 'https://www.instagram.com/reel/DcSgkFUtoMW/?igsi=MW9qYzZ4NWU2b3M4OA==',
   },
 ];
@@ -195,7 +198,7 @@ export default function PlasticCampaign() {
           </div>
 
           <button type="button" className="plastic-primary-button" onClick={() => storyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-            EXPLORE CAMPAIGN
+            OUR ACTIVITIES
           </button>
         </div>
       </header>
