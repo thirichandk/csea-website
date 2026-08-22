@@ -76,23 +76,24 @@
 .upcoming-primary-button svg { transition: transform 220ms ease; }
 .upcoming-primary-button:hover svg { transform: translateX(4px); }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .upcoming-events-page { padding-top: 24px; padding-bottom: 150px; }
   .upcoming-hero { margin-top: 38px; }
   .upcoming-hero h1 { font-size: clamp(38px, 11vw, 54px); }
   .upcoming-hero-subtitle { font-size: 15px; }
   .upcoming-page-poster { height: 58vh; max-height: 520px; }
   .upcoming-info-grid, .upcoming-content-grid, .upcoming-events-grid { grid-template-columns: 1fr; }
-  .upcoming-events-grid { grid-auto-rows: 1fr; }
+  .upcoming-events-grid { grid-auto-rows: auto; }
   .upcoming-details-info-grid, .upcoming-details-copy-grid { grid-template-columns: 1fr; }
   .reel-challenge-register-button { width: 100%; margin: -24px auto 32px; }
   .upcoming-info-grid { margin: 28px auto 54px; }
-  .upcoming-event-card { display: flex; flex-direction: column; }
-  .upcoming-event-card-media { height: auto; aspect-ratio: 4 / 3; }
-  .upcoming-event-card-body { padding: 24px 22px 22px; }
+  .upcoming-event-card { display: flex; overflow: visible; flex-direction: column; }
+  .upcoming-event-card-media { height: auto; min-height: 0; aspect-ratio: auto; overflow: visible; margin-bottom: 16px; }
+  .upcoming-event-card-media img { width: 100%; height: auto; object-fit: contain; }
+  .upcoming-event-card-body { padding: 0 18px 18px; }
   .upcoming-event-card-description { min-height: 0; }
   .upcoming-event-card-actions { flex-direction: column; }
-  .upcoming-event-card-actions button, .upcoming-event-card-actions a { width: 100%; }
+  .upcoming-event-card-actions button, .upcoming-event-card-actions a { width: 100%; min-height: 50px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
