@@ -1,5 +1,6 @@
 import sihPoster from '../assets/sih.png';
 import linkedinPoster from '../assets/linkedin.jpeg';
+import reelPoster from '../assets/reel.jpg';
 import datasetToDecisionPoster from '../assets/datasettodecision.jpg';
 import inauguralPoster from '../assets/inaugural-invitation.jpg';
 
@@ -24,7 +25,9 @@ export const eventsData = [
     message: 'Learn, innovate, collaborate, and get inspired for SIH 2026!',
     poster: sihPoster,
     registrationUrl: 'https://forms.gle/WSTNCKjfsrF9eFae6',
-    category: 'workshop'
+    category: 'workshop',
+    promotionActive: false,
+    registrationStatus: 'REGISTRATION COMPLETED'
   },
   {
     id: 'linkedin-placement-workshop',
@@ -47,7 +50,34 @@ export const eventsData = [
     message: "Don't just create a LinkedIn profile - learn how to turn it into a powerful career opportunity!",
     poster: linkedinPoster,
     registrationUrl: 'https://forms.gle/4FK4pxReNQwnD3it7',
-    category: 'workshop'
+    category: 'workshop',
+    promotionActive: false,
+    registrationStatus: 'REGISTRATION COMPLETED'
+  },
+  {
+    id: 'reel-challenge',
+    eventDate: '2026-08-22',
+    academicYear: '2026-2027',
+    status: 'upcoming',
+    title: 'Say No to Plastic — Reel Challenge',
+    shortTitle: 'SAY NO TO PLASTIC REEL CHALLENGE',
+    subtitle: 'Create • Inspire • Act 🌱',
+    description: 'Create a 1-minute awareness reel about saying no to plastic. Top 5 reels will be featured on Classroom TV and the CSEA Instagram page.',
+    shortDesc: 'Create a 1-minute awareness reel about saying no to plastic.',
+    detailedDesc: 'The event is a student Reel Challenge encouraging participants to create a 1-minute awareness reel about saying no to plastic.',
+    date: '22 August 2026',
+    day: 'DAY 08',
+    time: '1 minute',
+    duration: '1 minute',
+    deadline: '24 August 2026 | 11:59 PM',
+    topic: 'Say No to Plastic / Plastic Awareness',
+    highlight: 'Top 5 reels will be featured on Classroom TV & CSEA Instagram page.',
+    category: 'CSEA INITIATIVE',
+    message: 'Create, inspire, and act for a plastic-free future.',
+    poster: reelPoster,
+    registrationUrl: 'https://forms.gle/L31r1fXiJ6QWursH7',
+    registrationClosed: true,
+    promotionActive: true
   },
   {
     id: "csea-inaugural-2026-2027",

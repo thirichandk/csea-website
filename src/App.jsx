@@ -21,9 +21,11 @@ import UpcomingEventDetails from './pages/UpcomingEventDetails';
 import UpcomingEventModal from './components/UpcomingEventModal';
 import UpcomingEventsAccess from './components/UpcomingEventsAccess';
 import CompletedEventDetails from './pages/CompletedEventDetails';
-import { getUpcomingEvents } from './data/upcomingEvents';
+import { getPromotedUpcomingEvents, getUpcomingEvents } from './data/upcomingEvents';
 import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
+
+const UPCOMING_PROMOTION_SEEN_KEY = 'csea_upcoming_promotion_seen';
 
 const getRoute = () => {
   const parts = window.location.pathname.split('/').filter(Boolean);
@@ -41,7 +43,14 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAcademicYear, setSelectedAcademicYear] = useState('2026-2027');
+  const [isUpcomingPromotionOpen, setIsUpcomingPromotionOpen] = useState(() => (
+    initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
+  ));
   const previousView = useRef(view);
+
+  useEffect(() => {
+    if (isUpcomingPromotionOpen) sessionStorage.setItem(UPCOMING_PROMOTION_SEEN_KEY, 'true');
+  }, [isUpcomingPromotionOpen]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -334,7 +343,12 @@ export default function App() {
 
       <Footer />
 
-      <UpcomingEventModal events={getUpcomingEvents()} onViewEvent={handleUpcomingEventNavigation} onViewAll={() => handleUpcomingEventNavigation()} />
+      <UpcomingEventModal
+        event={getPromotedUpcomingEvents()[0]}
+        isOpen={isUpcomingPromotionOpen}
+        onClose={() => setIsUpcomingPromotionOpen(false)}
+        onExplore={() => { setIsUpcomingPromotionOpen(false); handleUpcomingEventNavigation(); }}
+      />
       <UpcomingEventsAccess count={getUpcomingEvents().length} onNavigate={handleUpcomingAccess} />
     </div>
   );
