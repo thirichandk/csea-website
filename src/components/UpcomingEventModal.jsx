@@ -7,16 +7,29 @@ export default function UpcomingEventModal({ event, isOpen, onClose, onExplore }
   useEffect(() => {
     if (!isOpen) return undefined;
 
-    const previousOverflow = document.body.style.overflow;
+    const bodyStyle = document.body.style;
+    const previousBodyStyles = {
+      overflow: bodyStyle.overflow,
+      overflowX: bodyStyle.overflowX,
+      overflowY: bodyStyle.overflowY,
+      position: bodyStyle.position,
+      height: bodyStyle.height,
+      maxHeight: bodyStyle.maxHeight,
+    };
     const closeWithEscape = (keyboardEvent) => {
       if (keyboardEvent.key === 'Escape') onClose();
     };
 
-    document.body.style.overflow = 'hidden';
+    bodyStyle.overflow = 'hidden';
     document.addEventListener('keydown', closeWithEscape);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      bodyStyle.overflow = previousBodyStyles.overflow;
+      bodyStyle.overflowX = previousBodyStyles.overflowX;
+      bodyStyle.overflowY = previousBodyStyles.overflowY;
+      bodyStyle.position = previousBodyStyles.position;
+      bodyStyle.height = previousBodyStyles.height;
+      bodyStyle.maxHeight = previousBodyStyles.maxHeight;
       document.removeEventListener('keydown', closeWithEscape);
     };
   }, [isOpen, onClose]);
