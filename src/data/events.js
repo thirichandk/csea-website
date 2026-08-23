@@ -59,8 +59,8 @@ export const eventsData = [
     eventDate: '2026-08-22',
     academicYear: '2026-2027',
     status: 'upcoming',
-    title: 'Say No to Plastic — Reel Challenge',
-    shortTitle: 'SAY NO TO PLASTIC REEL CHALLENGE',
+    title: 'Say No to Plastic – Reel Challenge',
+    shortTitle: 'Say No to Plastic – Reel Challenge',
     subtitle: 'Create • Inspire • Act 🌱',
     description: 'Create a 1-minute awareness reel about saying no to plastic. Top 5 reels will be featured on Classroom TV and the CSEA Instagram page.',
     shortDesc: 'Create a 1-minute awareness reel about saying no to plastic.',
@@ -76,7 +76,7 @@ export const eventsData = [
     message: 'Create, inspire, and act for a plastic-free future.',
     poster: reelPoster,
     registrationUrl: 'https://forms.gle/L31r1fXiJ6QWursH7',
-    registrationClosed: true,
+    registrationStatus: 'OPEN',
     promotionActive: true
   },
   {

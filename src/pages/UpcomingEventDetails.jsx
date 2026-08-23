@@ -37,14 +37,12 @@ export default function UpcomingEventDetails({ eventId, onBack }) {
           </>}
         </section>
 
-        {isReelChallenge && <a className="reel-challenge-register-button" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">REGISTER NOW <ArrowRight size={18} /></a>}
-
         <section className="upcoming-details-copy-grid">
           <article className="upcoming-copy-block reveal"><div className="upcoming-section-kicker">About the Event</div><h2>{isReelChallenge ? 'Say no to plastic.' : 'Make your next move count.'}</h2><p>{event.description}</p></article>
           <article className="upcoming-guest-block reveal"><div className="upcoming-section-kicker">{isReelChallenge ? 'Featured Highlight' : event.speakerLabel}</div><h2>{isReelChallenge ? 'Top 5 reels' : event.speaker?.name}</h2><p>{isReelChallenge ? event.highlight : event.speaker?.achievement}</p>{!isReelChallenge && <><p>{event.speaker?.designation}</p><p>{event.speaker?.organization}</p></>}</article>
         </section>
 
-        <section className="upcoming-details-message reveal"><div className="upcoming-section-kicker">Why You Should Attend</div><h2>{event.message}</h2>{event.organizedBy && <p>{event.organizedBy}</p>}{!event.registrationClosed && <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">Register Now <ArrowRight size={16} /></a>}</section>
+        <section className="upcoming-details-message reveal"><div className="upcoming-section-kicker">Why You Should Attend</div><h2>{event.message}</h2>{event.organizedBy && <p>{event.organizedBy}</p>}{!isReelChallenge && !event.registrationClosed && <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">Register Now <ArrowRight size={16} /></a>}</section>
       </div>
     </main>
   );

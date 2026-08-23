@@ -35,8 +35,6 @@
 .upcoming-details-info-grid svg { color: var(--primary); }
 .upcoming-details-info-grid span { color: var(--primary); font: 800 11px var(--font-heading); letter-spacing: .12em; }
 .upcoming-details-info-grid strong { font: 600 16px/1.35 var(--font-heading); overflow-wrap: anywhere; }
-.reel-challenge-register-button { display: flex; width: fit-content; align-items: center; justify-content: center; gap: 10px; min-height: 56px; margin: -42px auto 48px; padding: 16px 32px; border-radius: 9px; background: var(--primary); color: #fff; font: 800 16px var(--font-heading); letter-spacing: .04em; transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease; }
-.reel-challenge-register-button:hover { background: var(--primary-hover); box-shadow: 0 8px 18px rgba(255, 87, 34, .22); transform: translateY(-3px); }
 .upcoming-details-copy-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; max-width: 1080px; margin: auto; }
 .upcoming-details-message { max-width: 1080px; margin: 24px auto 0; padding: clamp(30px, 6vw, 62px); border-radius: 20px; background: linear-gradient(120deg, var(--primary), #d84315); color: #fff; text-align: center; }
 .upcoming-details-message h2 { max-width: 720px; margin: 14px auto 22px; color: #fff; font-size: clamp(28px, 5vw, 52px); line-height: 1.05; }
@@ -85,7 +83,6 @@
   .upcoming-info-grid, .upcoming-content-grid, .upcoming-events-grid { grid-template-columns: 1fr; }
   .upcoming-events-grid { grid-auto-rows: auto; }
   .upcoming-details-info-grid, .upcoming-details-copy-grid { grid-template-columns: 1fr; }
-  .reel-challenge-register-button { width: 100%; margin: -24px auto 32px; }
   .upcoming-info-grid { margin: 28px auto 54px; }
   .upcoming-event-card { display: flex; overflow: visible; flex-direction: column; }
   .upcoming-event-card-media { height: auto; min-height: 0; aspect-ratio: auto; overflow: visible; margin-bottom: 16px; }
@@ -97,5 +94,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .upcoming-page-poster, .upcoming-cta a, .upcoming-event-card, .upcoming-details-top-cta, .upcoming-details-message a, .reel-challenge-register-button { transition: none; }
+  .upcoming-page-poster, .upcoming-cta a, .upcoming-event-card, .upcoming-details-top-cta, .upcoming-details-message a { transition: none; }
 }
