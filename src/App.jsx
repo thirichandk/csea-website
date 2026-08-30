@@ -19,6 +19,7 @@ import Achievements from './pages/Achievements';
 import UpcomingEvents from './pages/UpcomingEvents';
 import UpcomingEventDetails from './pages/UpcomingEventDetails';
 import UpcomingEventModal from './components/UpcomingEventModal';
+import NewsletterPopup from './components/NewsletterPopup';
 import UpcomingEventsAccess from './components/UpcomingEventsAccess';
 import CompletedEventDetails from './pages/CompletedEventDetails';
 import { getPromotedUpcomingEvents, getUpcomingEvents } from './data/upcomingEvents';
@@ -26,9 +27,12 @@ import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 
 const UPCOMING_PROMOTION_SEEN_KEY = 'csea_upcoming_promotion_seen';
+const NEWSLETTER_POPUP_SEEN_KEY = 'csea_newsletter_popup_seen';
 
 const getRoute = () => {
   const parts = window.location.pathname.split('/').filter(Boolean);
+  if (parts[0] === 'achievements') return { view: 'achievements', eventId: null };
+  if (parts[0] === 'completed-events') return { view: parts[1] ? 'completed-event-details' : 'discover', eventId: parts[1] || null };
   if (parts[0] === 'explore-events') return { view: parts[1] ? 'completed-event-details' : 'discover', eventId: parts[1] || null };
   if (parts[0] === 'sdg') return { view: parts[1] === 'say-no-to-plastic' ? 'plastic-campaign' : 'sdg', eventId: null };
   if (parts[0] === 'upcoming-events') return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
@@ -46,11 +50,18 @@ export default function App() {
   const [isUpcomingPromotionOpen, setIsUpcomingPromotionOpen] = useState(() => (
     initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
   ));
+  const [isNewsletterPopupOpen, setIsNewsletterPopupOpen] = useState(() => (
+    initialRoute.view === 'home' && !sessionStorage.getItem(NEWSLETTER_POPUP_SEEN_KEY)
+  ));
   const previousView = useRef(view);
 
   useEffect(() => {
     if (isUpcomingPromotionOpen) sessionStorage.setItem(UPCOMING_PROMOTION_SEEN_KEY, 'true');
   }, [isUpcomingPromotionOpen]);
+
+  useEffect(() => {
+    if (isNewsletterPopupOpen) sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
+  }, [isNewsletterPopupOpen]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -109,6 +120,7 @@ export default function App() {
   });
 
   const handleNavigateToDiscover = (category = 'all') => {
+    window.history.pushState({}, '', '/completed-events');
     setActiveCategory(category);
     setView('discover');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -130,8 +142,21 @@ export default function App() {
   };
 
   const handleNavigateToAchievements = () => {
+    window.history.pushState({}, '', '/achievements');
     setView('achievements');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleViewAllSubmissionOptions = () => {
+    window.history.pushState({}, '', '/achievements');
+    setView('achievements');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      const section = document.getElementById('newsletter-submissions');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 80);
   };
 
   const handleNavigateToSDGActivities = () => {
@@ -147,14 +172,15 @@ export default function App() {
   };
 
   const handleCompletedEventNavigation = (event) => {
-    window.history.pushState({}, '', `/explore-events/${event.id}`);
+    const nextPath = `/completed-events/${event.id}`;
+    window.history.pushState({}, '', nextPath);
     setEventId(event.id);
     setView('completed-event-details');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackFromCompletedEvent = () => {
-    window.history.pushState({}, '', '/explore-events');
+    window.history.pushState({}, '', '/completed-events');
     setEventId(null);
     setView('discover');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -342,6 +368,12 @@ export default function App() {
       </div>
 
       <Footer />
+
+      <NewsletterPopup
+        isOpen={isNewsletterPopupOpen}
+        onClose={() => setIsNewsletterPopupOpen(false)}
+        onViewAllOptions={handleViewAllSubmissionOptions}
+      />
 
       <UpcomingEventModal
         event={getPromotedUpcomingEvents()[0]}

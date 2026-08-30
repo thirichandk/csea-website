@@ -17,9 +17,19 @@ export default function UpcomingEvents({ onBack, onViewDetails }) {
           <h1>What's happening at CSEA</h1>
           <p className="upcoming-hero-subtitle">Discover workshops, learning sessions and opportunities designed to help you learn, connect and grow.</p>
         </section>
-        <section className="upcoming-events-grid">
-          {events.map((event) => <UpcomingEventCard key={event.id} event={event} onViewDetails={onViewDetails} />)}
-        </section>
+
+        {events.length > 0 ? (
+          <section className="upcoming-events-grid">
+            {events.map((event) => <UpcomingEventCard key={event.id} event={event} onViewDetails={onViewDetails} />)}
+          </section>
+        ) : (
+          <section className="upcoming-empty-state reveal">
+            <div className="upcoming-empty-card">
+              <div className="section-badge section-badge-muted">NO UPCOMING EVENTS</div>
+              <h2>Stay tuned! New events and opportunities will be announced soon.</h2>
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

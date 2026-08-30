@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BriefcaseBusiness, Code2, Palette, Trophy } from 'lucide-react';
 import './Achievements.css';
 import AchievementCarousel from '../components/AchievementCarousel';
+import { newsletterSubmissions } from '../data/newsletterSubmissions';
 import EnthusiaImg from '../assets/Achievements/Enthusia.png';
 import AgritechImg from '../assets/Achievements/Agritech.png';
 import InnoImg from '../assets/Achievements/Inno.jpeg';
@@ -200,9 +202,54 @@ export default function Achievements() {
   const featuredCard = filteredCards[0];
   const secondaryCards = filteredCards.slice(1);
 
+  const submissionIcons = {
+    code: Code2,
+    trophy: Trophy,
+    palette: Palette,
+    briefcase: BriefcaseBusiness,
+  };
+
   return (
     <div className="achievements-wrap">
       <AchievementCarousel items={carouselItems} />
+
+      <section id="newsletter-submissions" className="newsletter-submission-section">
+        <div className="newsletter-submission-header">
+          <div className="newsletter-submission-eyebrow">GET FEATURED IN SCRIPTUS</div>
+          <h2>Your achievement, talent and technical work deserve to be seen.</h2>
+          <p>
+            CSEA is inviting students to submit their achievements, technical work, internships, arts and creative contributions for inclusion in our newsletter and website.
+          </p>
+        </div>
+
+        <div className="newsletter-submission-grid">
+          {newsletterSubmissions.map((item) => {
+            const Icon = submissionIcons[item.icon] || Code2;
+            return (
+              <article key={item.id} className="newsletter-submission-card">
+                <div className="newsletter-submission-card-top">
+                  <div className="newsletter-submission-icon-wrap">
+                    <Icon size={22} />
+                  </div>
+                  <span className="newsletter-submission-category">{item.category}</span>
+                </div>
+                <h3>{item.eyebrow}</h3>
+                <p className="newsletter-submission-short">{item.shortPrompt}</p>
+                <p className="newsletter-submission-copy">{item.description}</p>
+                <a
+                  href={item.formUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="newsletter-submission-button"
+                >
+                  {item.buttonText}
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       <div className="achievements-hero">
         <div className="achievements-eyebrow">
           <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17l-5.9 3.2 1.2-6.6L2.5 9l6.6-.9z" /></svg>
