@@ -5,11 +5,20 @@ import AnimationPlayground from './AnimationPlayground';
 export default function EventModal({ event, onClose }) {
   // Prevent background scrolling when modal is open
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const previousOverflowX = document.body.style.overflowX;
+    const previousOverflowY = document.body.style.overflowY;
+
     document.body.style.overflow = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowY = 'hidden';
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = previousOverflow;
+      document.body.style.overflowX = previousOverflowX;
+      document.body.style.overflowY = previousOverflowY;
     };
-  }, []);
+  }, [event]);
 
   if (!event) return null;
 

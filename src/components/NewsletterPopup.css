@@ -9,6 +9,12 @@
   background: rgba(21, 19, 15, 0.5);
   backdrop-filter: blur(8px);
   animation: newsletterPopupFadeIn 0.25s ease-out;
+  pointer-events: auto;
+}
+
+.newsletter-popup-overlay.hidden {
+  display: none;
+  pointer-events: none;
 }
 
 .newsletter-popup-card {
@@ -77,7 +83,7 @@
 
 .newsletter-popup-header p {
   margin: 0 auto;
-  max-width: 580px;
+  max-width: 620px;
   color: #4b4742;
   font-size: 15px;
   line-height: 1.6;
@@ -98,18 +104,29 @@
 .newsletter-popup-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   border: 1px solid rgba(231, 225, 211, 0.9);
   background: #fff;
   padding: 12px 14px;
   border-radius: 16px;
-  min-height: 74px;
+  min-height: 82px;
 }
 
-.newsletter-popup-item-header {
+.newsletter-popup-item-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.14), rgba(43, 107, 79, 0.12));
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.newsletter-popup-item-copy {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
@@ -122,27 +139,10 @@
   text-transform: uppercase;
 }
 
-.newsletter-popup-submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border: none;
-  border-radius: 999px;
-  background: #15130F;
-  color: #fff;
+.newsletter-popup-item-detail {
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 10px 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
-}
-
-.newsletter-popup-submit:hover {
-  background: #FF5A1F;
-  transform: translateY(-1px);
+  line-height: 1.5;
+  color: #5C544C;
 }
 
 .newsletter-popup-footer {
@@ -151,22 +151,24 @@
   justify-content: center;
 }
 
-.newsletter-popup-secondary {
-  border: 1px solid rgba(255, 90, 31, 0.2);
-  background: rgba(255, 90, 31, 0.06);
-  color: #FF5A1F;
-  font-size: 12px;
+.newsletter-popup-primary {
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #15130F 0%, #2B6B4F 100%);
+  color: #fff;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  border-radius: 999px;
-  padding: 12px 18px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-.newsletter-popup-secondary:hover {
+.newsletter-popup-primary:hover {
   transform: translateY(-1px);
-  background: rgba(255, 90, 31, 0.12);
+  box-shadow: 0 12px 28px rgba(43, 107, 79, 0.18);
+  filter: brightness(1.02);
 }
 
 @keyframes newsletterPopupFadeIn {
@@ -201,12 +203,11 @@
   }
 
   .newsletter-popup-item {
-    flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     min-height: 0;
   }
 
-  .newsletter-popup-submit {
+  .newsletter-popup-primary {
     width: 100%;
   }
 }

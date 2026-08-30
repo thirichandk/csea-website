@@ -32,7 +32,7 @@ export default function UpcomingEventModal({ event, isOpen, onClose, onExplore }
       bodyStyle.maxHeight = previousBodyStyles.maxHeight;
       document.removeEventListener('keydown', closeWithEscape);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen || !event) return null;
 

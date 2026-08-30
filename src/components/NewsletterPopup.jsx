@@ -1,11 +1,22 @@
 import { useEffect } from 'react';
-import { ArrowRight, X } from 'lucide-react';
-import { newsletterSubmissions } from '../data/newsletterSubmissions';
+import { X } from 'lucide-react';
 import './NewsletterPopup.css';
+
+const popupCategories = [
+  { icon: '💻', title: 'TECH CORNER', detail: 'Technical reports and articles' },
+  { icon: '🏆', title: 'STUDENT ACHIEVEMENTS', detail: 'Certificates and achievements' },
+  { icon: '🎨', title: 'ARTS & PAINTINGS', detail: 'Creative artwork and paintings' },
+  { icon: '💼', title: 'INTERNSHIPS', detail: 'Share your internship experience' },
+];
 
 export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
   useEffect(() => {
-    if (!isOpen) return undefined;
+    if (!isOpen) {
+      document.body.style.overflow = '';
+      document.body.style.overflowX = '';
+      document.body.style.overflowY = '';
+      return undefined;
+    }
 
     const previousOverflow = document.body.style.overflow;
     const previousOverflowX = document.body.style.overflowX;
@@ -27,17 +38,12 @@ export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
       document.body.style.overflowY = previousOverflowY;
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const openForm = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-    onClose();
-  };
-
   return (
-    <div className="newsletter-popup-overlay" role="dialog" aria-modal="true" aria-label="Newsletter submission options">
+    <div className="newsletter-popup-overlay" role="dialog" aria-modal="true" aria-label="Newsletter submission information">
       <div className="newsletter-popup-card">
         <button className="newsletter-popup-close" onClick={onClose} aria-label="Close newsletter popup">
           <X size={18} />
@@ -46,27 +52,25 @@ export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
         <div className="newsletter-popup-header">
           <div className="newsletter-popup-badge">CSEA NEWSLETTER</div>
           <h2>YOUR WORK DESERVES TO BE SEEN ✨</h2>
-          <p>Have an achievement, technical article, artwork or internship experience to share?</p>
-          <p className="newsletter-popup-subcopy">Submit your work and get a chance to be featured in the CSEA newsletter and website.</p>
+          <p>Have an achievement, technical article, artwork, or internship experience to share?</p>
+          <p className="newsletter-popup-subcopy">CSEA invites students to submit their work for a chance to be featured in the CSEA newsletter and website.</p>
         </div>
 
-        <div className="newsletter-popup-options">
-          {newsletterSubmissions.map((item) => (
-            <div key={item.id} className="newsletter-popup-item">
-              <div className="newsletter-popup-item-header">
-                <span className="newsletter-popup-item-title">{item.category}</span>
+        <div className="newsletter-popup-options" aria-label="Newsletter categories">
+          {popupCategories.map((item) => (
+            <div key={item.title} className="newsletter-popup-item">
+              <div className="newsletter-popup-item-icon" aria-hidden="true">{item.icon}</div>
+              <div className="newsletter-popup-item-copy">
+                <span className="newsletter-popup-item-title">{item.title}</span>
+                <span className="newsletter-popup-item-detail">{item.detail}</span>
               </div>
-              <button className="newsletter-popup-submit" onClick={() => openForm(item.formUrl)}>
-                SUBMIT NOW
-                <ArrowRight size={16} />
-              </button>
             </div>
           ))}
         </div>
 
         <div className="newsletter-popup-footer">
-          <button className="newsletter-popup-secondary" onClick={onViewAllOptions}>
-            VIEW ALL SUBMISSION OPTIONS
+          <button className="newsletter-popup-primary" onClick={onViewAllOptions}>
+            VIEW MORE
           </button>
         </div>
       </div>

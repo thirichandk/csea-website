@@ -64,6 +64,13 @@ export default function App() {
   }, [isNewsletterPopupOpen]);
 
   useEffect(() => {
+    if (view !== 'home' && isNewsletterPopupOpen) {
+      sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
+      setIsNewsletterPopupOpen(false);
+    }
+  }, [view, isNewsletterPopupOpen]);
+
+  useEffect(() => {
     const handlePopState = () => {
       const route = getRoute();
       setView(route.view);
@@ -141,13 +148,34 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const restoreBodyScroll = () => {
+    document.body.style.overflow = '';
+    document.body.style.overflowX = '';
+    document.body.style.overflowY = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+  };
+
+  const closeNewsletterPopup = () => {
+    restoreBodyScroll();
+    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
+    setIsNewsletterPopupOpen(false);
+  };
+
   const handleNavigateToAchievements = () => {
+    restoreBodyScroll();
+    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
+    setIsNewsletterPopupOpen(false);
     window.history.pushState({}, '', '/achievements');
     setView('achievements');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleViewAllSubmissionOptions = () => {
+    restoreBodyScroll();
+    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
+    setIsNewsletterPopupOpen(false);
     window.history.pushState({}, '', '/achievements');
     setView('achievements');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -371,7 +399,7 @@ export default function App() {
 
       <NewsletterPopup
         isOpen={isNewsletterPopupOpen}
-        onClose={() => setIsNewsletterPopupOpen(false)}
+        onClose={closeNewsletterPopup}
         onViewAllOptions={handleViewAllSubmissionOptions}
       />
 
