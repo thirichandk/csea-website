@@ -70,7 +70,7 @@ export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
 
         <div className="newsletter-popup-footer">
           <button className="newsletter-popup-primary" onClick={onViewAllOptions}>
-            VIEW MORE
+            Click to Proceed
           </button>
         </div>
       </div>
