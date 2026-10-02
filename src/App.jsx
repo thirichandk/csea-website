@@ -19,7 +19,6 @@ import Achievements from './pages/Achievements';
 import UpcomingEvents from './pages/UpcomingEvents';
 import UpcomingEventDetails from './pages/UpcomingEventDetails';
 import UpcomingEventModal from './components/UpcomingEventModal';
-import NewsletterPopup from './components/NewsletterPopup';
 import UpcomingEventsAccess from './components/UpcomingEventsAccess';
 import CompletedEventDetails from './pages/CompletedEventDetails';
 import Newsletter from './pages/Newsletter';
@@ -28,7 +27,6 @@ import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
 
 const UPCOMING_PROMOTION_SEEN_KEY = 'csea_upcoming_promotion_seen';
-const NEWSLETTER_POPUP_SEEN_KEY = 'csea_newsletter_popup_seen';
 
 const getRoute = () => {
   const parts = window.location.pathname.split('/').filter(Boolean);
@@ -52,25 +50,11 @@ export default function App() {
   const [isUpcomingPromotionOpen, setIsUpcomingPromotionOpen] = useState(() => (
     initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
   ));
-  const [isNewsletterPopupOpen, setIsNewsletterPopupOpen] = useState(() => (
-    initialRoute.view === 'home' && !sessionStorage.getItem(NEWSLETTER_POPUP_SEEN_KEY)
-  ));
   const previousView = useRef(view);
 
   useEffect(() => {
     if (isUpcomingPromotionOpen) sessionStorage.setItem(UPCOMING_PROMOTION_SEEN_KEY, 'true');
   }, [isUpcomingPromotionOpen]);
-
-  useEffect(() => {
-    if (isNewsletterPopupOpen) sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
-  }, [isNewsletterPopupOpen]);
-
-  useEffect(() => {
-    if (view !== 'home' && isNewsletterPopupOpen) {
-      sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
-      setIsNewsletterPopupOpen(false);
-    }
-  }, [view, isNewsletterPopupOpen]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -150,43 +134,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const restoreBodyScroll = () => {
-    document.body.style.overflow = '';
-    document.body.style.overflowX = '';
-    document.body.style.overflowY = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
-    document.body.style.top = '';
-  };
-
-  const closeNewsletterPopup = () => {
-    restoreBodyScroll();
-    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
-    setIsNewsletterPopupOpen(false);
-  };
-
   const handleNavigateToAchievements = () => {
-    restoreBodyScroll();
-    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
-    setIsNewsletterPopupOpen(false);
     window.history.pushState({}, '', '/achievements');
     setView('achievements');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleViewAllSubmissionOptions = () => {
-    restoreBodyScroll();
-    sessionStorage.setItem(NEWSLETTER_POPUP_SEEN_KEY, 'true');
-    setIsNewsletterPopupOpen(false);
-    window.history.pushState({}, '', '/achievements');
-    setView('achievements');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-      const section = document.getElementById('newsletter-submissions');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 80);
   };
 
   const handleNavigateToSDGActivities = () => {
@@ -416,15 +367,6 @@ export default function App() {
 
       <Footer />
 
-      <NewsletterPopup
-        isOpen={isNewsletterPopupOpen}
-        onClose={closeNewsletterPopup}
-        onViewAllOptions={handleViewAllSubmissionOptions}
-        onReadNewsletter={() => {
-          closeNewsletterPopup();
-          handleNavigateToNewsletter();
-        }}
-      />
 
       <UpcomingEventModal
         event={getPromotedUpcomingEvents()[0]}
