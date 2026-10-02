@@ -1,4 +1,4 @@
-.completed-event-page { padding: 32px 0 110px; }
+.completed-event-page { padding: 140px 0 110px; }
 .completed-event-hero { max-width: 850px; margin: 54px auto 48px; text-align: center; }
 .completed-event-hero h1 { margin-top: 14px; font-size: clamp(38px, 7vw, 72px); line-height: .98; }
 .completed-event-year { margin: 24px 0 8px; color: var(--primary); font: 800 13px var(--font-heading); letter-spacing: .16em; }
@@ -18,5 +18,5 @@
 .completed-event-speaker > span { color: #ffc9b8; font: 800 11px var(--font-heading); letter-spacing: .14em; text-transform: uppercase; }
 .completed-event-speaker h3 { margin: 10px 0 8px; color: #fff; font-size: 27px; }
 .completed-event-speaker p { color: rgba(255, 255, 255, .72); line-height: 1.5; }
-@media (max-width: 720px) { .completed-event-page { padding-top: 24px; } .completed-event-hero { margin-top: 36px; margin-bottom: 34px; } .completed-event-layout { grid-template-columns: 1fr; gap: 30px; } .completed-event-poster { max-height: 620px; } .completed-event-meta { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .completed-event-page { padding-top: 120px; } .completed-event-hero { margin-top: 36px; margin-bottom: 34px; } .completed-event-layout { grid-template-columns: 1fr; gap: 30px; } .completed-event-poster { max-height: 620px; } .completed-event-meta { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .completed-event-page .reveal { animation: none; } }

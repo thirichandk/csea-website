@@ -343,6 +343,16 @@ a {
   }
 }
 
+@media (max-width: 600px) {
+  .navbar-main {
+    padding: 10px 0;
+  }
+  .navbar-logo img,
+  .csea-logo-image {
+    max-height: 64px;
+  }
+}
+
 /* remove unused SVG logo hover animations */
 .csea-logo-container:hover .logo-crown-group,
 .csea-logo-container:hover .logo-lion-group,
@@ -660,9 +670,18 @@ a {
   position: relative;
 }
 
-.office-bearers-section {
-  padding-top: 120px;
+.office-bearers-section,
+.sdg-section {
+  padding-top: 130px;
   position: relative;
+}
+
+@media (max-width: 600px) {
+  .events-section-container,
+  .office-bearers-section,
+  .sdg-section {
+    padding-top: 110px;
+  }
 }
 
 .back-nav-wrapper {
