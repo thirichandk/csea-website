@@ -9,7 +9,7 @@ const popupCategories = [
   { icon: '💼', title: 'INTERNSHIPS', detail: 'Share your internship experience' },
 ];
 
-export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
+export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions, onReadNewsletter }) {
   useEffect(() => {
     if (!isOpen) {
       document.body.style.overflow = '';
@@ -50,7 +50,7 @@ export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
         </button>
 
         <div className="newsletter-popup-header">
-          <div className="newsletter-popup-badge">CSEA NEWSLETTER</div>
+          <div className="newsletter-popup-badge">CSEA NEWSLETTER · SCRIPTUS</div>
           <h2>YOUR WORK DESERVES TO BE SEEN ✨</h2>
           <p>Have an achievement, technical article, artwork, or internship experience to share?</p>
           <p className="newsletter-popup-subcopy">CSEA invites students to submit their work for a chance to be featured in the CSEA newsletter and website.</p>
@@ -68,9 +68,22 @@ export default function NewsletterPopup({ isOpen, onClose, onViewAllOptions }) {
           ))}
         </div>
 
-        <div className="newsletter-popup-footer">
-          <button className="newsletter-popup-primary" onClick={onViewAllOptions}>
-            Click to Proceed
+        <div className="newsletter-popup-footer" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          {onReadNewsletter && (
+            <button 
+              className="newsletter-popup-primary" 
+              style={{ flex: 1, minWidth: '180px', background: 'linear-gradient(135deg, #e4571e 0%, #c9400b 100%)' }}
+              onClick={onReadNewsletter}
+            >
+              Read Scriptus Edition 01 📖
+            </button>
+          )}
+          <button 
+            className="newsletter-popup-primary" 
+            style={{ flex: 1, minWidth: '180px' }}
+            onClick={onViewAllOptions}
+          >
+            Submit Your Work ✨
           </button>
         </div>
       </div>

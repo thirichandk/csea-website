@@ -1,4 +1,4 @@
-import { ArrowLeft, CalendarDays, Clock3, GraduationCap, MapPin, Sparkles } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock3, GraduationCap, MapPin, Sparkles, ExternalLink } from 'lucide-react';
 import { eventsData, getEventStatus } from '../data/events';
 import './CompletedEventDetails.css';
 
@@ -33,6 +33,20 @@ export default function CompletedEventDetails({ eventId, onBack }) {
             <span className="completed-event-status">Completed</span>
             <h2>Event Overview</h2>
             <p>{event.detailedDesc || event.shortDesc}</p>
+            {event.externalUrl && (
+              <div style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
+                <a 
+                  href={event.externalUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-primary"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', padding: '10px 20px', borderRadius: '8px' }}
+                >
+                  <span>{event.actionLabel || 'Read Newsletter Online'}</span>
+                  <ExternalLink size={16} />
+                </a>
+              </div>
+            )}
             <div className="completed-event-meta">
               <div><CalendarDays size={18} /><span><strong>Date</strong>{event.date}</span></div>
               {event.time && <div><Clock3 size={18} /><span><strong>Time</strong>{event.time}</span></div>}

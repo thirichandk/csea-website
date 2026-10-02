@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, Users, ChevronRight, Award } from 'lucide-react';
+import { Calendar, Clock, Users, ChevronRight, Award, ExternalLink } from 'lucide-react';
 
 export default function EventCard({ event, onViewDetails }) {
   const getCategoryMeta = (cat) => {
@@ -30,16 +30,46 @@ export default function EventCard({ event, onViewDetails }) {
       <div className="card-body">
         {/* Badge & Date Header */}
         <div className="card-header-meta">
-          <span className={`category-badge ${meta.className}`}>{event.status === 'completed' ? 'Completed' : meta.label}</span>
+          <span className={`category-badge ${meta.className}`}>
+            {event.badgeLabel || (event.status === 'completed' ? 'Completed' : meta.label)}
+          </span>
           <div className="card-date-wrapper">
             <Calendar size={14} className="date-icon" />
             <span className="card-date">{event.date}</span>
           </div>
         </div>
 
+        {/* Poster */}
+        {event.poster && (
+          event.externalUrl ? (
+            <a 
+              href={event.externalUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="archive-event-poster-link"
+              title={`Open ${event.title}`}
+              style={{ display: 'block' }}
+            >
+              <img className="archive-event-poster cursor-pointer" src={event.poster} alt={`${event.title} poster`} loading="lazy" />
+            </a>
+          ) : (
+            <img className="archive-event-poster" src={event.poster} alt={`${event.title} poster`} loading="lazy" />
+          )
+        )}
+
         {/* Title */}
-        {event.poster && <img className="archive-event-poster" src={event.poster} alt={`${event.title} poster`} loading="lazy" />}
-        <h3 className="card-title">{event.title}</h3>
+        {event.externalUrl ? (
+          <a 
+            href={event.externalUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <h3 className="card-title">{event.title}</h3>
+          </a>
+        ) : (
+          <h3 className="card-title">{event.title}</h3>
+        )}
 
         {/* Short Description */}
         <p className="card-short-desc">{event.shortDesc}</p>
@@ -82,7 +112,18 @@ export default function EventCard({ event, onViewDetails }) {
 
         {/* Call to Action */}
         <div className="card-footer-action">
-          {hasDetails ? (
+          {event.externalUrl ? (
+            <a 
+              href={event.externalUrl}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-card-details"
+              style={{ textDecoration: 'none' }}
+            >
+              <span>{event.actionLabel || 'Read Newsletter'}</span>
+              <ExternalLink size={16} className="arrow-icon" />
+            </a>
+          ) : hasDetails ? (
             <button 
               className="btn-card-details" 
               onClick={() => onViewDetails(event)}

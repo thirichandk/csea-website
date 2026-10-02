@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { Menu, X, Home } from 'lucide-react';
 
-export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateAboutCSEA, onNavigateOffice, onNavigateYearPlan, onNavigateAchievements, onNavigateSDG }) {
+export default function Navbar({ activeCategory, setActiveCategory, view, setView, onNavigate, onNavigateAboutCSEA, onNavigateOffice, onNavigateYearPlan, onNavigateAchievements, onNavigateSDG, onNavigateNewsletter }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -82,6 +82,13 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
             <span>SDG Activities</span>
           </button>
 
+          <button
+            className={`nav-link-btn ${view === 'newsletter' ? 'active' : ''}`}
+            onClick={() => { onNavigateNewsletter(); setIsOpen(false); }}
+          >
+            <span>Newsletter</span>
+          </button>
+
           <button 
             className={`btn-primary ${view === 'discover' ? 'btn-active' : ''}`}
             onClick={handleDiscoverClick}
@@ -121,6 +128,10 @@ export default function Navbar({ activeCategory, setActiveCategory, view, setVie
 
           <button className="mobile-nav-link" onClick={() => { onNavigateSDG(); setIsOpen(false); }}>
             <span>SDG Activities</span>
+          </button>
+
+          <button className={`mobile-nav-link ${view === 'newsletter' ? 'active' : ''}`} onClick={() => { onNavigateNewsletter(); setIsOpen(false); }}>
+            <span>Newsletter</span>
           </button>
 
           <button 

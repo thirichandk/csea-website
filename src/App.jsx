@@ -22,6 +22,7 @@ import UpcomingEventModal from './components/UpcomingEventModal';
 import NewsletterPopup from './components/NewsletterPopup';
 import UpcomingEventsAccess from './components/UpcomingEventsAccess';
 import CompletedEventDetails from './pages/CompletedEventDetails';
+import Newsletter from './pages/Newsletter';
 import { getPromotedUpcomingEvents, getUpcomingEvents } from './data/upcomingEvents';
 import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
@@ -36,6 +37,7 @@ const getRoute = () => {
   if (parts[0] === 'explore-events') return { view: parts[1] ? 'completed-event-details' : 'discover', eventId: parts[1] || null };
   if (parts[0] === 'sdg') return { view: parts[1] === 'say-no-to-plastic' ? 'plastic-campaign' : 'sdg', eventId: null };
   if (parts[0] === 'upcoming-events') return { view: parts[1] ? 'upcoming-event-details' : 'upcoming-events', eventId: parts[1] || null };
+  if (parts[0] === 'newsletter') return { view: 'newsletter', eventId: null };
   return { view: 'home', eventId: null };
 };
 
@@ -199,7 +201,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToNewsletter = () => {
+    window.history.pushState({}, '', '/newsletter');
+    setView('newsletter');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleCompletedEventNavigation = (event) => {
+    if (event.externalUrl) {
+      window.open(event.externalUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
     const nextPath = `/completed-events/${event.id}`;
     window.history.pushState({}, '', nextPath);
     setEventId(event.id);
@@ -229,6 +241,7 @@ export default function App() {
         onNavigateYearPlan={handleNavigateToYearPlan}
         onNavigateAchievements={handleNavigateToAchievements}
         onNavigateSDG={handleNavigateToSDGActivities}
+        onNavigateNewsletter={handleNavigateToNewsletter}
       />
 
       <div key={view} style={{ animation: 'fadeInUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
@@ -332,6 +345,12 @@ export default function App() {
           </section>
         )}
 
+        {view === 'newsletter' && (
+          <Newsletter 
+            onBack={() => { window.history.pushState({}, '', '/'); setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
         {view === 'discover' && (
           <section className="events-section-container">
             <div className="container">
@@ -401,6 +420,10 @@ export default function App() {
         isOpen={isNewsletterPopupOpen}
         onClose={closeNewsletterPopup}
         onViewAllOptions={handleViewAllSubmissionOptions}
+        onReadNewsletter={() => {
+          closeNewsletterPopup();
+          handleNavigateToNewsletter();
+        }}
       />
 
       <UpcomingEventModal
