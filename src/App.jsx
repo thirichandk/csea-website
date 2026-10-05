@@ -47,10 +47,21 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAcademicYear, setSelectedAcademicYear] = useState('2026-2027');
+  const promotedUpcomingEvents = getPromotedUpcomingEvents();
+  const promotedEvent = promotedUpcomingEvents.length > 0 ? promotedUpcomingEvents[0] : null;
   const [isUpcomingPromotionOpen, setIsUpcomingPromotionOpen] = useState(() => (
-    initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
+    Boolean(promotedEvent) && initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
   ));
   const previousView = useRef(view);
+
+  // Guarantee that whenever no promotional modal is showing or view changes, body scroll locks are cleared
+  useEffect(() => {
+    if (!isUpcomingPromotionOpen) {
+      document.body.style.overflow = '';
+      document.body.style.overflowX = '';
+      document.body.style.overflowY = '';
+    }
+  }, [isUpcomingPromotionOpen, view]);
 
   useEffect(() => {
     if (isUpcomingPromotionOpen) sessionStorage.setItem(UPCOMING_PROMOTION_SEEN_KEY, 'true');
@@ -368,12 +379,14 @@ export default function App() {
       <Footer />
 
 
-      <UpcomingEventModal
-        event={getPromotedUpcomingEvents()[0]}
-        isOpen={isUpcomingPromotionOpen}
-        onClose={() => setIsUpcomingPromotionOpen(false)}
-        onExplore={() => { setIsUpcomingPromotionOpen(false); handleUpcomingEventNavigation(); }}
-      />
+      {promotedEvent && (
+        <UpcomingEventModal
+          event={promotedEvent}
+          isOpen={isUpcomingPromotionOpen}
+          onClose={() => setIsUpcomingPromotionOpen(false)}
+          onExplore={() => { setIsUpcomingPromotionOpen(false); handleUpcomingEventNavigation(); }}
+        />
+      )}
       <UpcomingEventsAccess count={getUpcomingEvents().length} onNavigate={handleUpcomingAccess} />
     </div>
   );
