@@ -22,6 +22,7 @@ import UpcomingEventModal from './components/UpcomingEventModal';
 import UpcomingEventsAccess from './components/UpcomingEventsAccess';
 import CompletedEventDetails from './pages/CompletedEventDetails';
 import Newsletter from './pages/Newsletter';
+import NewsletterPopup from './components/NewsletterPopup';
 import { getPromotedUpcomingEvents, getUpcomingEvents } from './data/upcomingEvents';
 import { eventsData, getEventStatus } from './data/events';
 import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
@@ -52,16 +53,17 @@ export default function App() {
   const [isUpcomingPromotionOpen, setIsUpcomingPromotionOpen] = useState(() => (
     Boolean(promotedEvent) && initialRoute.view === 'home' && !sessionStorage.getItem(UPCOMING_PROMOTION_SEEN_KEY)
   ));
+  const [isNewsletterModalOpen, setIsNewsletterModalOpen] = useState(true);
   const previousView = useRef(view);
 
   // Guarantee that whenever no promotional modal is showing or view changes, body scroll locks are cleared
   useEffect(() => {
-    if (!isUpcomingPromotionOpen) {
+    if (!isUpcomingPromotionOpen && !isNewsletterModalOpen) {
       document.body.style.overflow = '';
       document.body.style.overflowX = '';
       document.body.style.overflowY = '';
     }
-  }, [isUpcomingPromotionOpen, view]);
+  }, [isUpcomingPromotionOpen, isNewsletterModalOpen, view]);
 
   useEffect(() => {
     if (isUpcomingPromotionOpen) sessionStorage.setItem(UPCOMING_PROMOTION_SEEN_KEY, 'true');
@@ -388,6 +390,25 @@ export default function App() {
         />
       )}
       <UpcomingEventsAccess count={getUpcomingEvents().length} onNavigate={handleUpcomingAccess} />
+
+      <NewsletterPopup 
+        isOpen={isNewsletterModalOpen}
+        onClose={() => setIsNewsletterModalOpen(false)}
+        onReadNewsletter={handleNavigateToNewsletter}
+      />
+
+      {!isNewsletterModalOpen && (
+        <button 
+          type="button" 
+          className="newsletter-floating-trigger"
+          onClick={() => setIsNewsletterModalOpen(true)}
+          aria-label="Open Newsletter Edition 02 Submissions Form"
+        >
+          <Sparkles size={16} />
+          <span>Edition 02 Submissions</span>
+          <span className="newsletter-floating-dot" aria-hidden="true" />
+        </button>
+      )}
     </div>
   );
 }

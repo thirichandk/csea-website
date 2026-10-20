@@ -12,10 +12,13 @@ import {
   Globe, 
   Layers,
   Calendar,
-  FileText
+  FileText,
+  Trophy,
+  Briefcase
 } from 'lucide-react';
 import { newsletterData } from '../data/newsletter';
 import { officeBearers } from '../data/officeBearers';
+import { newsletterSubmissions } from '../data/newsletterSubmissions';
 import './Newsletter.css';
 
 export default function Newsletter({ onBack }) {
@@ -153,6 +156,52 @@ export default function Newsletter({ onBack }) {
                 <Sparkles size={14} />
                 <span>Features smooth page flips, full-screen mode, zoom, and thumbnail navigation.</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Edition 02 Submissions Callout Section */}
+        <section className="edition02-callout-section">
+          <div className="edition02-banner-card glass-panel">
+            <div className="section-header-wrap">
+              <div className="section-badge" style={{ background: 'linear-gradient(135deg, rgba(255, 87, 34, 0.12), rgba(255, 179, 0, 0.15))', borderColor: 'rgba(255, 87, 34, 0.3)', color: '#d84315' }}>
+                <Sparkles size={16} className="sparkle-icon" />
+                <span>NOW ACCEPTING SUBMISSIONS · SCRIPTUS EDITION 02</span>
+              </div>
+              <h2 className="section-main-title">Contribute to Scriptus Edition 02 🚀</h2>
+              <p className="section-subtitle">
+                The Department of Computer Science & Engineering invites students across all years to submit their work for the upcoming 
+                Second Edition of our official newsletter. Select a domain below to contribute via Google Forms:
+              </p>
+            </div>
+
+            <div className="edition02-cards-grid">
+              {newsletterSubmissions.map((sub) => {
+                const IconComponent = sub.icon === 'code' ? Code2 : sub.icon === 'palette' ? Palette : sub.icon === 'trophy' ? Trophy : Briefcase;
+                return (
+                  <div key={sub.id} className={`edition02-field-card theme-${sub.theme || 'orange'}`}>
+                    <div className="edition02-card-top">
+                      <div className={`edition02-icon-wrap theme-${sub.theme || 'orange'}`}>
+                        <IconComponent size={22} />
+                      </div>
+                      <div className="edition02-meta">
+                        <span className="edition02-cat-tag">{sub.category}</span>
+                        <h3 className="edition02-card-title">{sub.title}</h3>
+                      </div>
+                    </div>
+                    <p className="edition02-card-desc">{sub.description}</p>
+                    <a
+                      href={sub.formUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`btn-edition02-action theme-${sub.theme || 'orange'}`}
+                    >
+                      <span>{sub.buttonText}</span>
+                      <ExternalLink size={15} />
+                    </a>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
